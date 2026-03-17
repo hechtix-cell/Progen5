@@ -93,14 +93,17 @@ const cardVariants = {
 
 function Price({ value }: { value: string }) {
   return (
-    <div className="mt-2 flex w-full items-baseline overflow-hidden whitespace-nowrap">
+    <div className="mt-2 flex w-full items-baseline whitespace-nowrap">
       <span
         style={{
           fontFamily: "Exo 2",
           fontWeight: "800",
           fontSize: "26px",
           color: "#FFFFFF",
+          overflow: "visible",
           whiteSpace: "nowrap",
+          display: "block",
+          width: "100%",
         }}
       >
         {value}
