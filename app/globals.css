@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap');
+
+:root {
+  --color-black: #000000;
+  --color-dark-gray: #232227;
+  --color-blue: #007BFC;
+  --color-light-gray: #A5A5A5;
+  --color-white: #FFFFFF;
+
+  --font-heading: 'Satoshi', sans-serif;
+  --font-ui: 'General Sans', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-accent: 'Exo 2', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #000000;
+  color: #FFFFFF;
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background-color: #007BFC;
+  color: #FFFFFF;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #007BFC;
+  border-radius: 3px;
+}
