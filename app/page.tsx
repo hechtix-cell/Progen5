@@ -2,6 +2,7 @@
 
 import About from "@/components/About";
 import Contact from "@/components/Contact";
+import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import Navbar from "@/components/Navbar";
@@ -52,6 +53,7 @@ export default function Home() {
         <About />
         <Testimonials />
         <Pricing />
+        <FAQ />
         <Contact />
         <Footer />
         <WhatsAppButton />

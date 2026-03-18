@@ -8,6 +8,7 @@ import clsx from "clsx";
 const NAV_LINKS = [
   { label: "Services", href: "#services" },
   { label: "Pricing", href: "#pricing" },
+  { label: "FAQ", href: "#faq" },
   { label: "About", href: "#about" },
   { label: "Contact", href: "#contact" },
 ] as const;
