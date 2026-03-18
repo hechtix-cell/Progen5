@@ -65,8 +65,8 @@ export default function Contact() {
 
     try {
       await emailjs.send(
-        "YOUR_SERVICE_ID",
-        "YOUR_TEMPLATE_ID",
+        "service_s8lf9dl",
+        "template_axbudfs",
         {
           from_name: formData.name,
           from_email: formData.email,
@@ -75,7 +75,7 @@ export default function Contact() {
           message: formData.message,
           to_email: "hechtix@gmail.com",
         },
-        "YOUR_PUBLIC_KEY",
+        "JA00utn3-ygwujAVr",
       );
       setIsSubmitted(true);
     } catch {
