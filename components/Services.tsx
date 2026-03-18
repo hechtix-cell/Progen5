@@ -122,7 +122,7 @@ export default function Services() {
             variants={cardVariants}
             className="group rounded-card border border-[rgba(165,165,165,0.1)] bg-dark-gray p-8 transition-all duration-200 ease-out hover:-translate-y-1 hover:border-[rgba(0,123,252,0.5)] hover:shadow-[0_0_24px_rgba(0,123,252,0.08)]"
           >
-            <div className="flex h-11 w-11 items-center justify-center rounded-[10px] bg-[rgba(0,123,252,0.1)] p-[10px]">
+            <div className="flex h-11 w-11 items-center justify-center rounded-[10px] bg-[rgba(0,123,252,0.1)] p-[10px] transition-transform duration-300 ease-out group-hover:rotate-3 group-hover:scale-110">
               <service.Icon className="h-[22px] w-[22px] text-blue" />
             </div>
 

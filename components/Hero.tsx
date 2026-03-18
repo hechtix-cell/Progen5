@@ -2,8 +2,35 @@
 
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
+import { useEffect, useState } from "react";
+
+const BADGE_TEXT = "Startup Execution Agency";
 
 export default function Hero() {
+  const [typedText, setTypedText] = useState("");
+  const [showCursor, setShowCursor] = useState(false);
+
+  useEffect(() => {
+    let index = 0;
+    const interval = setInterval(() => {
+      index += 1;
+      setTypedText(BADGE_TEXT.slice(0, index));
+      if (index === BADGE_TEXT.length) {
+        clearInterval(interval);
+        setShowCursor(true);
+      }
+    }, 80);
+
+    const cursorTimeout = setTimeout(() => {
+      setShowCursor(false);
+    }, BADGE_TEXT.length * 80 + 3000);
+
+    return () => {
+      clearInterval(interval);
+      clearTimeout(cursorTimeout);
+    };
+  }, []);
+
   const fadeUp = (delay: number) =>
     ({
       initial: { opacity: 0, y: 20 },
@@ -26,6 +53,15 @@ export default function Hero() {
         backgroundSize: "30px 30px",
       }}
     >
+      <style>
+        {`
+          @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+          }
+        `}
+      </style>
+
       {/* Soft blue radial glow */}
       <div
         className="pointer-events-none absolute inset-0"
@@ -42,7 +78,17 @@ export default function Hero() {
             {...fadeUp(0)}
             className="inline-flex rounded-full border border-[rgba(0,123,252,0.3)] bg-[rgba(0,123,252,0.1)] px-4 py-[6px] font-ui text-[13px] text-blue"
           >
-            🚀 Startup Execution Agency
+            🚀 {typedText || BADGE_TEXT}
+            {showCursor ? (
+              <span
+                style={{
+                  marginLeft: "2px",
+                  animation: "blink 1s infinite",
+                }}
+              >
+                |
+              </span>
+            ) : null}
           </motion.div>
 
           {/* Headline */}

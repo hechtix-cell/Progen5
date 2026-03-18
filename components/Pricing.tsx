@@ -136,6 +136,22 @@ export default function Pricing() {
         </p>
       </motion.header>
 
+      <style>
+        {`
+          @keyframes borderGlow {
+            0%, 100% {
+              box-shadow: 0 0 20px rgba(0,123,252,0.2);
+            }
+            50% {
+              box-shadow: 0 0 50px rgba(0,123,252,0.6);
+            }
+          }
+          .pricing-glow {
+            animation: borderGlow 3s ease infinite;
+          }
+        `}
+      </style>
+
       <motion.div
         className="mx-auto mt-[60px] max-w-[1200px]"
         variants={listVariants}
@@ -151,11 +167,11 @@ export default function Pricing() {
                 key={plan.name}
                 variants={cardVariants}
                 className={[
-                  "relative flex h-full min-w-[280px] flex-col rounded-card p-8",
+                  "relative flex h-full min-w-[280px] flex-col rounded-card p-8 transition-transform duration-200 ease-out hover:-translate-y-2",
                   "border border-[rgba(165,165,165,0.1)] bg-dark-gray",
                   "md:min-w-0",
                   isRecommended
-                    ? "border-2 border-blue bg-[#0d1929] shadow-[0_0_32px_rgba(0,123,252,0.15)] md:scale-[1.03]"
+                    ? "border-2 border-blue bg-[#0d1929] shadow-[0_0_32px_rgba(0,123,252,0.15)] md:scale-[1.03] pricing-glow"
                     : "",
                 ].join(" ")}
               >
