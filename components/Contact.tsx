@@ -172,6 +172,7 @@ export default function Contact() {
                   })
                 }
                 placeholder="your@email.com"
+                type="email"
                 className={fieldClasses}
               />
             </div>
