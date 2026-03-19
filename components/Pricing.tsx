@@ -98,7 +98,7 @@ function Price({ value }: { value: string }) {
         style={{
           fontFamily: "Exo 2",
           fontWeight: "800",
-          fontSize: "26px",
+          fontSize: "22px",
           color: "var(--text-primary)",
           overflow: "visible",
           whiteSpace: "nowrap",
@@ -159,7 +159,7 @@ export default function Pricing() {
         whileInView="show"
         viewport={{ once: true }}
       >
-        <div className="flex gap-5 overflow-x-auto pb-2 md:grid md:grid-cols-5 md:overflow-x-visible">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-5">
           {PLANS.map((plan) => {
             const isRecommended = Boolean(plan.recommended);
             return (
@@ -167,9 +167,9 @@ export default function Pricing() {
                 key={plan.name}
                 variants={cardVariants}
                 className={[
-                  "relative flex h-full min-w-[280px] flex-col rounded-card p-8 transition-transform duration-200 ease-out hover:-translate-y-2",
-                  "card-surface",
-                  "md:min-w-0",
+                  "relative flex h-full min-w-[200px] flex-col overflow-hidden break-words rounded-card p-8 transition-transform duration-200 ease-out hover:-translate-y-2",
+                  "pricing-card card-surface",
+                  "w-full md:max-w-[220px]",
                   isRecommended
                     ? "border-2 border-blue bg-[#0d1929] shadow-[0_0_32px_rgba(0,123,252,0.15)] md:scale-[1.03] pricing-glow"
                     : "",
@@ -181,7 +181,7 @@ export default function Pricing() {
                   </div>
                 ) : null}
 
-                <div className="font-ui text-[13px] uppercase tracking-[2px] text-[var(--text-secondary)]">
+                <div className="truncate font-ui text-[11px] uppercase tracking-[1.5px] text-[var(--text-secondary)]">
                   {plan.name}
                 </div>
 

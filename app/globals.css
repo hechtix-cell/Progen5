@@ -90,3 +90,9 @@ body {
 .light .card-surface {
   box-shadow: 0 2px 12px rgba(0,0,0,0.06);
 }
+
+.light .pricing-card {
+  background: #FFFFFF;
+  border: 1px solid rgba(0,0,0,0.08);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}

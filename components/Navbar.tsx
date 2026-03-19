@@ -27,7 +27,9 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => setMounted(true), []);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <header
@@ -68,28 +70,34 @@ export default function Navbar() {
           ))}
         </nav>
 
+        {mounted && (
+          <button
+            type="button"
+            aria-label="Toggle theme"
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            style={{
+              width: "38px",
+              height: "38px",
+              borderRadius: "8px",
+              background: "var(--bg-secondary, #232227)",
+              border: "1px solid rgba(165,165,165,0.2)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+              transition: "all 200ms",
+            }}
+          >
+            {theme === "dark" ? (
+              <Sun size={16} color="#A5A5A5" />
+            ) : (
+              <Moon size={16} color="#555555" />
+            )}
+          </button>
+        )}
+
         {/* RIGHT */}
         <div className="flex items-center gap-3">
-          {mounted ? (
-            <button
-              type="button"
-              aria-label="Toggle theme"
-              onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-              className={clsx(
-                "hidden md:inline-flex",
-                "h-[38px] w-[38px] items-center justify-center rounded-[8px]",
-                "bg-[var(--bg-secondary)] border border-[var(--border)]",
-                "transition duration-200 hover:border-[var(--accent)]",
-              )}
-            >
-              {theme === "light" ? (
-                <Sun className="h-4 w-4 text-[var(--text-secondary)]" />
-              ) : (
-                <Moon className="h-4 w-4 text-[var(--text-secondary)]" />
-              )}
-            </button>
-          ) : null}
-
           <a
             href="#contact"
             className={clsx(
