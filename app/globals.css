@@ -5,16 +5,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap');
 
 :root {
-  --color-black: #000000;
-  --color-dark-gray: #232227;
-  --color-blue: #007BFC;
-  --color-light-gray: #A5A5A5;
-  --color-white: #FFFFFF;
+  --bg-primary: #000000;
+  --bg-secondary: #232227;
+  --text-primary: #FFFFFF;
+  --text-secondary: #A5A5A5;
+  --accent: #007BFC;
+  --border: rgba(165,165,165,0.1);
+  --card-bg: #232227;
 
   --font-heading: 'Satoshi', sans-serif;
   --font-ui: 'General Sans', sans-serif;
   --font-body: 'Inter', sans-serif;
   --font-accent: 'Exo 2', sans-serif;
+}
+
+.light {
+  --bg-primary: #F8F9FC;
+  --bg-secondary: #FFFFFF;
+  --text-primary: #0A0A0A;
+  --text-secondary: #555555;
+  --accent: #007BFC;
+  --border: rgba(0,0,0,0.1);
+  --card-bg: #FFFFFF;
 }
 
 * {
@@ -28,10 +40,11 @@ html {
 }
 
 body {
-  background-color: #000000;
-  color: #FFFFFF;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
+  transition: background-color 300ms ease, color 300ms ease;
 }
 
 ::selection {
@@ -44,10 +57,36 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #000000;
+  background: var(--bg-primary);
 }
 
 ::-webkit-scrollbar-thumb {
   background: #007BFC;
   border-radius: 3px;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--bg-secondary) 25%,
+    rgba(0,123,252,0.05) 50%,
+    var(--bg-secondary) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 8px;
+}
+
+.card-surface {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+}
+
+.light .card-surface {
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
 }

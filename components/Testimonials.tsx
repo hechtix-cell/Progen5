@@ -82,11 +82,11 @@ const headerVariants = {
 
 function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
   return (
-    <div className="flex w-[320px] shrink-0 flex-col rounded-card border border-[rgba(165,165,165,0.1)] bg-dark-gray p-7">
+    <div className="card-surface flex w-[320px] shrink-0 flex-col rounded-card p-7">
       <div className="mb-3 text-[14px]" aria-label="5 star rating">
         <span style={{ color: "#FFB800" }}>★★★★★</span>
       </div>
-      <p className="mb-5 font-body text-[15px] leading-[1.7] text-light-gray">
+      <p className="mb-5 font-body text-[15px] leading-[1.7] text-[var(--text-secondary)]">
         {testimonial.quote}
       </p>
       <div className="mt-auto flex items-center gap-3">
@@ -102,10 +102,10 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
           </span>
         </div>
         <div className="flex flex-col">
-          <span className="font-heading text-[15px] font-bold text-white">
+          <span className="font-heading text-[15px] font-bold text-[var(--text-primary)]">
             {testimonial.name}
           </span>
-          <span className="font-body text-[13px] text-light-gray">
+          <span className="font-body text-[13px] text-[var(--text-secondary)]">
             {testimonial.role}
           </span>
         </div>
@@ -118,7 +118,7 @@ export default function Testimonials() {
   return (
     <section
       id="testimonials"
-      className="w-full bg-[#0a0a0a] px-6 py-20 md:px-[80px] md:py-[120px]"
+      className="w-full bg-[var(--bg-secondary)] px-6 py-20 md:px-[80px] md:py-[120px]"
     >
       <style>
         {`
@@ -161,10 +161,10 @@ export default function Testimonials() {
         <div className="font-ui text-[12px] tracking-[3px] text-blue">
           TESTIMONIALS
         </div>
-        <h2 className="mt-3 font-heading text-[34px] font-extrabold text-white md:text-[48px]">
+        <h2 className="mt-3 font-heading text-[34px] font-extrabold text-[var(--text-primary)] md:text-[48px]">
           What Founders Say
         </h2>
-        <p className="mt-3 font-body text-[17px] text-light-gray">
+        <p className="mt-3 font-body text-[17px] text-[var(--text-secondary)]">
           Real feedback from real founders we&apos;ve worked with.
         </p>
       </motion.header>

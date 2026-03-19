@@ -90,7 +90,10 @@ const cardVariants = {
 
 export default function Services() {
   return (
-    <section id="services" className="w-full bg-black px-6 py-20 md:px-[80px] md:py-[120px]">
+    <section
+      id="services"
+      className="w-full bg-[var(--bg-secondary)] px-6 py-20 md:px-[80px] md:py-[120px]"
+    >
       <motion.header
         className="mx-auto flex max-w-[800px] flex-col items-center text-center"
         variants={headerVariants}
@@ -101,10 +104,10 @@ export default function Services() {
         <div className="mb-3 font-ui text-[12px] tracking-[3px] text-blue">
           WHAT WE BUILD
         </div>
-        <h2 className="font-heading text-[36px] font-extrabold text-white md:text-[48px]">
+        <h2 className="font-heading text-[36px] font-extrabold text-[var(--text-primary)] md:text-[48px]">
           Services We Offer
         </h2>
-        <p className="mt-3 font-body text-[17px] text-light-gray">
+        <p className="mt-3 font-body text-[17px] text-[var(--text-secondary)]">
           Everything your startup needs — under one roof.
         </p>
       </motion.header>
@@ -120,17 +123,17 @@ export default function Services() {
           <motion.div
             key={service.title}
             variants={cardVariants}
-            className="group rounded-card border border-[rgba(165,165,165,0.1)] bg-dark-gray p-8 transition-all duration-200 ease-out hover:-translate-y-1 hover:border-[rgba(0,123,252,0.5)] hover:shadow-[0_0_24px_rgba(0,123,252,0.08)]"
+            className="card-surface group rounded-card p-8 transition-all duration-200 ease-out hover:-translate-y-1 hover:border-[rgba(0,123,252,0.5)] hover:shadow-[0_0_24px_rgba(0,123,252,0.08)]"
           >
             <div className="flex h-11 w-11 items-center justify-center rounded-[10px] bg-[rgba(0,123,252,0.1)] p-[10px] transition-transform duration-300 ease-out group-hover:rotate-3 group-hover:scale-110">
               <service.Icon className="h-[22px] w-[22px] text-blue" />
             </div>
 
-            <div className="mt-4 font-heading text-[20px] font-bold text-white">
+            <div className="mt-4 font-heading text-[20px] font-bold text-[var(--text-primary)]">
               {service.title}
             </div>
 
-            <p className="mt-2 font-body text-[14px] leading-[1.6] text-light-gray">
+            <p className="mt-2 font-body text-[14px] leading-[1.6] text-[var(--text-secondary)]">
               {service.description}
             </p>
 
@@ -138,7 +141,7 @@ export default function Services() {
               {service.features.map((feature) => (
                 <li
                   key={feature}
-                  className="flex items-start gap-3 font-body text-[13px] text-light-gray"
+                  className="flex items-start gap-3 font-body text-[13px] text-[var(--text-secondary)]"
                 >
                   <span className="mt-[7px] h-2 w-2 rounded-full bg-blue" />
                   <span>{feature}</span>
@@ -150,7 +153,7 @@ export default function Services() {
       </motion.div>
 
       <div className="mt-14 flex flex-col items-center justify-center gap-4 text-center md:mt-[56px]">
-        <div className="font-body text-[16px] text-light-gray">
+        <div className="font-body text-[16px] text-[var(--text-secondary)]">
           Not sure where to start?
         </div>
         <a

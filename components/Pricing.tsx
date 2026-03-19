@@ -99,7 +99,7 @@ function Price({ value }: { value: string }) {
           fontFamily: "Exo 2",
           fontWeight: "800",
           fontSize: "26px",
-          color: "#FFFFFF",
+          color: "var(--text-primary)",
           overflow: "visible",
           whiteSpace: "nowrap",
           display: "block",
@@ -116,7 +116,7 @@ export default function Pricing() {
   return (
     <section
       id="pricing"
-      className="w-full bg-black px-6 py-20 md:px-[80px] md:py-[120px]"
+      className="w-full bg-[var(--bg-primary)] px-6 py-20 md:px-[80px] md:py-[120px]"
     >
       <motion.header
         className="mx-auto flex max-w-[800px] flex-col items-center text-center"
@@ -128,10 +128,10 @@ export default function Pricing() {
         <div className="font-ui text-[12px] tracking-[3px] text-blue">
           PRICING
         </div>
-        <h2 className="mt-3 font-heading text-[34px] font-extrabold text-white md:text-[48px]">
+        <h2 className="mt-3 font-heading text-[34px] font-extrabold text-[var(--text-primary)] md:text-[48px]">
           Simple, Transparent Pricing
         </h2>
-        <p className="mt-3 font-body text-[17px] text-light-gray">
+        <p className="mt-3 font-body text-[17px] text-[var(--text-secondary)]">
           No hidden fees. Pick the plan that fits your startup stage.
         </p>
       </motion.header>
@@ -168,7 +168,7 @@ export default function Pricing() {
                 variants={cardVariants}
                 className={[
                   "relative flex h-full min-w-[280px] flex-col rounded-card p-8 transition-transform duration-200 ease-out hover:-translate-y-2",
-                  "border border-[rgba(165,165,165,0.1)] bg-dark-gray",
+                  "card-surface",
                   "md:min-w-0",
                   isRecommended
                     ? "border-2 border-blue bg-[#0d1929] shadow-[0_0_32px_rgba(0,123,252,0.15)] md:scale-[1.03] pricing-glow"
@@ -181,23 +181,23 @@ export default function Pricing() {
                   </div>
                 ) : null}
 
-                <div className="font-ui text-[13px] uppercase tracking-[2px] text-light-gray">
+                <div className="font-ui text-[13px] uppercase tracking-[2px] text-[var(--text-secondary)]">
                   {plan.name}
                 </div>
 
                 <Price value={plan.price} />
 
-                <div className="mt-1 font-body text-[13px] text-light-gray">
+                <div className="mt-1 font-body text-[13px] text-[var(--text-secondary)]">
                   {plan.subtext}
                 </div>
 
-                <div className="my-5 h-px w-full bg-[rgba(165,165,165,0.1)]" />
+                <div className="my-5 h-px w-full bg-[var(--border)]" />
 
                 <ul className="mb-6 space-y-3">
                   {plan.features.map((feature) => (
                     <li
                       key={feature}
-                      className="flex items-start gap-[10px] font-body text-[14px] text-light-gray"
+                      className="flex items-start gap-[10px] font-body text-[14px] text-[var(--text-secondary)]"
                     >
                       <CheckCircle2 className="mt-[3px] h-[15px] w-[15px] flex-none text-blue" />
                       <span>{feature}</span>
@@ -223,7 +223,7 @@ export default function Pricing() {
         </div>
       </motion.div>
 
-      <div className="mx-auto mt-10 flex max-w-[800px] items-start justify-center gap-3 text-center font-body text-[14px] text-light-gray">
+      <div className="mx-auto mt-10 flex max-w-[800px] items-start justify-center gap-3 text-center font-body text-[14px] text-[var(--text-secondary)]">
         <Info className="mt-[2px] h-4 w-4 flex-none text-blue" />
         <p>
           All packages include a free consultation call before we start.

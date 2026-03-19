@@ -46,7 +46,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen w-full bg-black"
+      className="relative min-h-screen w-full bg-[var(--bg-primary)]"
       style={{
         backgroundImage:
           "radial-gradient(circle, rgba(0,123,252,0.15) 1px, transparent 1px)",
@@ -94,7 +94,7 @@ export default function Hero() {
           {/* Headline */}
           <motion.h1
             {...fadeUp(0.1)}
-            className="font-heading text-[42px] font-extrabold leading-[1.1] text-white md:text-[72px]"
+            className="font-heading text-[42px] font-extrabold leading-[1.1] text-[var(--text-primary)] md:text-[72px]"
           >
             Turn your <span className="text-blue">Vision</span> into Reality
           </motion.h1>
@@ -102,7 +102,7 @@ export default function Hero() {
           {/* Subheadline */}
           <motion.p
             {...fadeUp(0.2)}
-            className="mx-auto max-w-[560px] font-body text-[16px] leading-[1.7] text-light-gray md:text-[18px]"
+            className="mx-auto max-w-[560px] font-body text-[16px] leading-[1.7] text-[var(--text-secondary)] md:text-[18px]"
           >
             We handle design, development, branding and launch — so you can focus
             on your idea.
@@ -121,7 +121,7 @@ export default function Hero() {
             </a>
             <a
               href="#"
-              className="inline-flex w-full items-center justify-center rounded-btn border border-[rgba(165,165,165,0.4)] bg-transparent px-8 py-[14px] font-ui text-[15px] text-white transition duration-200 hover:border-white sm:w-auto"
+              className="inline-flex w-full items-center justify-center rounded-btn border border-[var(--border)] bg-transparent px-8 py-[14px] font-ui text-[15px] text-[var(--text-primary)] transition duration-200 hover:border-[var(--accent)] sm:w-auto"
             >
               See Our Work
             </a>
@@ -130,31 +130,31 @@ export default function Hero() {
           {/* Stats bar */}
           <motion.div
             {...fadeUp(0.4)}
-            className="mt-6 w-full rounded-card border border-[rgba(165,165,165,0.15)] bg-[rgba(0,0,0,0.35)] px-6 py-5 backdrop-blur-sm"
+            className="mt-6 w-full rounded-card border border-[var(--border)] bg-[var(--bg-secondary)] px-6 py-5 backdrop-blur-sm"
           >
             {/* Mobile: 3-column grid (no dividers) */}
             <div className="grid grid-cols-3 gap-4 md:hidden">
               <div className="flex flex-col items-center">
-                <div className="font-accent text-[28px] font-bold text-white">
+                <div className="font-accent text-[28px] font-bold text-[var(--text-primary)]">
                   10+
                 </div>
-                <div className="font-body text-[13px] text-light-gray">
+                <div className="font-body text-[13px] text-[var(--text-secondary)]">
                   Projects Launched
                 </div>
               </div>
               <div className="flex flex-col items-center">
-                <div className="font-accent text-[28px] font-bold text-white">
+                <div className="font-accent text-[28px] font-bold text-[var(--text-primary)]">
                   2–4 Weeks
                 </div>
-                <div className="font-body text-[13px] text-light-gray">
+                <div className="font-body text-[13px] text-[var(--text-secondary)]">
                   MVP Delivery
                 </div>
               </div>
               <div className="flex flex-col items-center">
-                <div className="font-accent text-[28px] font-bold text-white">
+                <div className="font-accent text-[28px] font-bold text-[var(--text-primary)]">
                   5 Packages
                 </div>
-                <div className="font-body text-[13px] text-light-gray">
+                <div className="font-body text-[13px] text-[var(--text-secondary)]">
                   To Fit Your Budget
                 </div>
               </div>
@@ -163,32 +163,32 @@ export default function Hero() {
             {/* Desktop: row with dividers */}
             <div className="hidden items-center justify-center md:flex">
               <div className="flex flex-col items-center px-6">
-                <div className="font-accent text-[28px] font-bold text-white">
+                <div className="font-accent text-[28px] font-bold text-[var(--text-primary)]">
                   10+
                 </div>
-                <div className="font-body text-[13px] text-light-gray">
+                <div className="font-body text-[13px] text-[var(--text-secondary)]">
                   Projects Launched
                 </div>
               </div>
 
-              <div className="h-10 w-px bg-[rgba(165,165,165,0.15)]" />
+              <div className="h-10 w-px bg-[var(--border)]" />
 
               <div className="flex flex-col items-center px-6">
-                <div className="font-accent text-[28px] font-bold text-white">
+                <div className="font-accent text-[28px] font-bold text-[var(--text-primary)]">
                   2–4 Weeks
                 </div>
-                <div className="font-body text-[13px] text-light-gray">
+                <div className="font-body text-[13px] text-[var(--text-secondary)]">
                   MVP Delivery
                 </div>
               </div>
 
-              <div className="h-10 w-px bg-[rgba(165,165,165,0.15)]" />
+              <div className="h-10 w-px bg-[var(--border)]" />
 
               <div className="flex flex-col items-center px-6">
-                <div className="font-accent text-[28px] font-bold text-white">
+                <div className="font-accent text-[28px] font-bold text-[var(--text-primary)]">
                   5 Packages
                 </div>
-                <div className="font-body text-[13px] text-light-gray">
+                <div className="font-body text-[13px] text-[var(--text-secondary)]">
                   To Fit Your Budget
                 </div>
               </div>
@@ -201,7 +201,7 @@ export default function Hero() {
       <motion.button
         type="button"
         aria-label="Scroll to services"
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-light-gray"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-[var(--text-secondary)]"
         onClick={scrollToServices}
         animate={{ y: [0, 8, 0] }}
         transition={{ duration: 1.5, repeat: Infinity }}

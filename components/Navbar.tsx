@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, Moon, Sun, X } from "lucide-react";
 import clsx from "clsx";
+import { useTheme } from "next-themes";
 
 const NAV_LINKS = [
   { label: "Services", href: "#services" },
@@ -16,6 +17,8 @@ const NAV_LINKS = [
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 50);
@@ -24,13 +27,15 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => setMounted(true), []);
+
   return (
     <header
       className={clsx(
         "fixed top-0 left-0 right-0 z-50",
-        "h-[70px] border-b border-[rgba(165,165,165,0.15)]",
+        "h-[70px] border-b border-[var(--border)]",
         "transition-colors duration-200",
-        isScrolled ? "bg-[rgba(0,0,0,0.90)] backdrop-blur-md" : "bg-transparent",
+        isScrolled ? "bg-[var(--bg-secondary)] backdrop-blur-md" : "bg-transparent",
       )}
     >
       <div className="mx-auto flex h-full w-full items-center justify-between px-6 md:px-[80px]">
@@ -51,12 +56,12 @@ export default function Navbar() {
         </a>
 
         {/* CENTER */}
-        <nav className="hidden md:flex items-center gap-10 font-ui text-[15px] text-light-gray">
+        <nav className="hidden md:flex items-center gap-10 font-ui text-[15px] text-[var(--text-secondary)]">
           {NAV_LINKS.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="transition-colors duration-200 hover:text-white"
+              className="transition-colors duration-200 hover:text-[var(--text-primary)]"
             >
               {link.label}
             </a>
@@ -65,6 +70,26 @@ export default function Navbar() {
 
         {/* RIGHT */}
         <div className="flex items-center gap-3">
+          {mounted ? (
+            <button
+              type="button"
+              aria-label="Toggle theme"
+              onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+              className={clsx(
+                "hidden md:inline-flex",
+                "h-[38px] w-[38px] items-center justify-center rounded-[8px]",
+                "bg-[var(--bg-secondary)] border border-[var(--border)]",
+                "transition duration-200 hover:border-[var(--accent)]",
+              )}
+            >
+              {theme === "light" ? (
+                <Sun className="h-4 w-4 text-[var(--text-secondary)]" />
+              ) : (
+                <Moon className="h-4 w-4 text-[var(--text-secondary)]" />
+              )}
+            </button>
+          ) : null}
+
           <a
             href="#contact"
             className={clsx(
@@ -79,7 +104,7 @@ export default function Navbar() {
 
           <button
             type="button"
-            className="inline-flex items-center justify-center text-white md:hidden"
+            className="inline-flex items-center justify-center text-[var(--text-primary)] md:hidden"
             aria-label="Open menu"
             onClick={() => setIsOpen(true)}
           >
@@ -91,7 +116,7 @@ export default function Navbar() {
       <AnimatePresence>
         {isOpen ? (
           <motion.aside
-            className="fixed inset-0 z-50 bg-black"
+            className="fixed inset-0 z-50 bg-[var(--bg-primary)]"
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
@@ -100,19 +125,19 @@ export default function Navbar() {
             <div className="relative h-full w-full">
               <button
                 type="button"
-                className="absolute right-6 top-6 inline-flex items-center justify-center text-white"
+                className="absolute right-6 top-6 inline-flex items-center justify-center text-[var(--text-primary)]"
                 aria-label="Close menu"
                 onClick={() => setIsOpen(false)}
               >
                 <X className="h-6 w-6" />
               </button>
 
-              <nav className="flex h-full flex-col items-center justify-center gap-8 font-ui text-[15px] text-light-gray">
+              <nav className="flex h-full flex-col items-center justify-center gap-8 font-ui text-[15px] text-[var(--text-secondary)]">
                 {NAV_LINKS.map((link) => (
                   <a
                     key={link.href}
                     href={link.href}
-                    className="transition-colors duration-200 hover:text-white"
+                    className="transition-colors duration-200 hover:text-[var(--text-primary)]"
                     onClick={() => setIsOpen(false)}
                   >
                     {link.label}
