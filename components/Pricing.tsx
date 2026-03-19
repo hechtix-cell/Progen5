@@ -13,6 +13,20 @@ type Plan = {
 
 const PLANS: readonly Plan[] = [
   {
+    name: "BASIC WEBSITE",
+    price: "₹8K",
+    subtext: "Perfect to get started",
+    features: [
+      "Professional website design",
+      "Mobile responsive",
+      "Up to 5 pages",
+      "Contact form included",
+      "Basic SEO setup",
+      "24/7 support included",
+      "Delivered in 3-5 days",
+    ],
+  },
+  {
     name: "Starter",
     price: "₹5K – ₹10K",
     subtext: "Best for early ideas",
@@ -68,6 +82,21 @@ const PLANS: readonly Plan[] = [
       "Branding & identity",
       "Investor pitch deck",
       "Launch support",
+    ],
+  },
+  {
+    name: "AI CHATBOT",
+    price: "₹6K – ₹8K",
+    subtext: "+ ₹1,500/month maintenance",
+    features: [
+      "Custom trained on your business",
+      "Answers FAQs 24/7 automatically",
+      "Website chat widget",
+      "Powered by Google Gemini AI",
+      "Lead capture built in",
+      "Google Sheets integration",
+      "Monthly performance report",
+      "Ready in 3-5 days",
     ],
   },
 ] as const;
@@ -159,7 +188,7 @@ export default function Pricing() {
         whileInView="show"
         viewport={{ once: true }}
       >
-        <div className="grid grid-cols-1 gap-4 overflow-visible md:grid-cols-3 lg:grid-cols-5">
+        <div className="grid grid-cols-1 gap-3 overflow-visible md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7">
           {PLANS.map((plan) => {
             const isRecommended = Boolean(plan.recommended);
             return (
@@ -185,6 +214,12 @@ export default function Pricing() {
                 <div className="truncate font-ui text-[11px] uppercase tracking-[1.5px] text-[var(--text-secondary)]">
                   {plan.name}
                 </div>
+
+                {plan.name === "AI CHATBOT" ? (
+                  <div className="mt-2 inline-flex rounded-full border border-[rgba(0,123,252,0.3)] bg-[rgba(0,123,252,0.1)] px-[10px] py-[3px] font-ui text-[11px] text-blue">
+                    🤖 AI Powered
+                  </div>
+                ) : null}
 
                 <Price value={plan.price} />
 
