@@ -116,7 +116,7 @@ export default function Pricing() {
   return (
     <section
       id="pricing"
-      className="w-full bg-[var(--bg-primary)] px-6 py-20 md:px-[80px] md:py-[120px]"
+      className="w-full overflow-visible bg-[var(--bg-primary)] px-6 py-20 pt-[30px] md:px-[80px] md:py-[120px]"
     >
       <motion.header
         className="mx-auto flex max-w-[800px] flex-col items-center text-center"
@@ -153,13 +153,13 @@ export default function Pricing() {
       </style>
 
       <motion.div
-        className="mx-auto mt-[60px] max-w-[1200px]"
+        className="mx-auto mt-[60px] max-w-[1200px] overflow-visible pt-[20px]"
         variants={listVariants}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true }}
       >
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-5">
+        <div className="grid grid-cols-1 gap-4 overflow-visible md:grid-cols-3 lg:grid-cols-5">
           {PLANS.map((plan) => {
             const isRecommended = Boolean(plan.recommended);
             return (
@@ -167,16 +167,17 @@ export default function Pricing() {
                 key={plan.name}
                 variants={cardVariants}
                 className={[
-                  "relative flex h-full min-w-[200px] flex-col overflow-hidden break-words rounded-card p-8 transition-transform duration-200 ease-out hover:-translate-y-2",
+                  "relative flex h-full min-w-[200px] flex-col break-words rounded-card p-8 transition-transform duration-200 ease-out hover:-translate-y-2",
                   "pricing-card card-surface",
                   "w-full md:max-w-[220px]",
+                  isRecommended ? "overflow-visible mt-[20px] pt-[20px]" : "overflow-hidden",
                   isRecommended
                     ? "border-2 border-blue bg-[#0d1929] shadow-[0_0_32px_rgba(0,123,252,0.15)] md:scale-[1.03] pricing-glow"
                     : "",
                 ].join(" ")}
               >
                 {isRecommended ? (
-                  <div className="absolute -top-[14px] left-1/2 -translate-x-1/2 rounded-full bg-blue px-4 py-1 font-ui text-[12px] font-bold text-white">
+                  <div className="absolute top-[-16px] left-1/2 z-10 -translate-x-1/2 whitespace-nowrap rounded-full bg-blue px-4 py-1 font-ui text-[12px] font-bold text-white">
                     Most Popular
                   </div>
                 ) : null}
