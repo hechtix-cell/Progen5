@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import "./globals.css";
-import ChatWidget from './components/ChatWidget';
+import ChatWidget from '../components/ChatWidget';
 
 const inter = Inter({
   subsets: ["latin"],
