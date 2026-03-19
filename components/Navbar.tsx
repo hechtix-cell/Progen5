@@ -45,13 +45,12 @@ export default function Navbar() {
         <a href="#hero" className="flex items-center">
           <div style={{ display: "flex", alignItems: "center", padding: "0px" }}>
             <img
-              src="/images/logo.svg"
+              src="/images/logo.svg?v=3"
               alt="Progen5"
               style={{
-                height: "110px",
+                height: "55px",
                 width: "auto",
-                mixBlendMode: "screen",
-                filter: "brightness(1)",
+                display: "block",
               }}
             />
           </div>

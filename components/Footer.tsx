@@ -51,7 +51,15 @@ export default function Footer() {
           <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-12">
             {/* Column 1 — Brand */}
             <div className="lg:col-span-4">
-              <img src="/images/logo.svg" alt="Progen5" className="h-9 w-auto" />
+              <img
+                src="/images/logo.svg?v=3"
+                alt="Progen5"
+                style={{
+                  height: "36px",
+                  width: "auto",
+                  display: "block",
+                }}
+              />
 
               <div className="mt-3 font-body text-[14px] text-[var(--text-secondary)]">
                 Turn your Vision into Reality
