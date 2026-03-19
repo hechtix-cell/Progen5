@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 type Testimonial = {
   quote: string;
   name: string;
+  role: string;
   initials: string;
 };
 
@@ -13,24 +14,28 @@ const ROW_ONE: readonly Testimonial[] = [
     quote:
       "Progen5 took my idea and turned it into a real product in just 3 weeks. I had zero technical knowledge and they handled everything perfectly.",
     name: "Rahul Sharma",
+    role: "Founder, EduTrack",
     initials: "RS",
   },
   {
     quote:
       "The design quality is insane for the price. My investors were impressed with the pitch deck and UI they built.",
     name: "Priya Menon",
+    role: "CEO, HealthBridge",
     initials: "PM",
   },
   {
     quote:
       "I was overwhelmed trying to hire designers and developers separately. Progen5 made it so simple — one team, everything done.",
     name: "Arjun Patel",
+    role: "Indie Hacker",
     initials: "AP",
   },
   {
     quote:
       "Fastest turnaround I've ever seen. Landing page was live in 4 days and conversions are already coming in.",
     name: "Sneha Reddy",
+    role: "Founder, FitMeals",
     initials: "SR",
   },
 ] as const;
@@ -40,24 +45,28 @@ const ROW_TWO: readonly Testimonial[] = [
     quote:
       "They don't just build — they think like co-founders. The strategic input they gave was invaluable.",
     name: "Kiran Nair",
+    role: "Startup Founder",
     initials: "KN",
   },
   {
     quote:
       "Best investment I made for my startup. The MVP + Design package gave me everything I needed to start pitching.",
     name: "Amit Joshi",
+    role: "Founder, LogiFlow",
     initials: "AJ",
   },
   {
     quote:
       "Professional, fast, and affordable. Progen5 is exactly what non-tech founders like me need.",
     name: "Divya Kumar",
+    role: "Creator & Entrepreneur",
     initials: "DK",
   },
   {
     quote:
       "From idea to launch in under a month. I still can't believe how smooth the whole process was.",
     name: "Rohan Verma",
+    role: "Co-Founder, PayEase",
     initials: "RV",
   },
 ] as const;
@@ -73,11 +82,11 @@ const headerVariants = {
 
 function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
   return (
-    <div className="flex w-[320px] shrink-0 flex-col rounded-card border border-[rgba(165,165,165,0.1)] bg-dark-gray p-7">
+    <div className="card-surface flex w-[320px] shrink-0 flex-col rounded-card p-7">
       <div className="mb-3 text-[14px]" aria-label="5 star rating">
         <span style={{ color: "#FFB800" }}>★★★★★</span>
       </div>
-      <p className="mb-5 font-body text-[15px] leading-[1.7] text-light-gray">
+      <p className="mb-5 font-body text-[15px] leading-[1.7] text-[var(--text-secondary)]">
         {testimonial.quote}
       </p>
       <div className="mt-auto flex items-center gap-3">
@@ -93,10 +102,12 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
           </span>
         </div>
         <div className="flex flex-col">
-          <span className="font-heading text-[15px] font-bold text-white">
+          <span className="font-heading text-[15px] font-bold text-[var(--text-primary)]">
             {testimonial.name}
           </span>
-       
+          <span className="font-body text-[13px] text-[var(--text-secondary)]">
+            {testimonial.role}
+          </span>
         </div>
       </div>
     </div>
@@ -107,7 +118,7 @@ export default function Testimonials() {
   return (
     <section
       id="testimonials"
-      className="w-full bg-[#0a0a0a] px-6 py-20 md:px-[80px] md:py-[120px]"
+      className="w-full bg-[var(--bg-secondary)] px-6 py-20 md:px-[80px] md:py-[120px]"
     >
       <style>
         {`
@@ -150,10 +161,10 @@ export default function Testimonials() {
         <div className="font-ui text-[12px] tracking-[3px] text-blue">
           TESTIMONIALS
         </div>
-        <h2 className="mt-3 font-heading text-[34px] font-extrabold text-white md:text-[48px]">
+        <h2 className="mt-3 font-heading text-[34px] font-extrabold text-[var(--text-primary)] md:text-[48px]">
           What Founders Say
         </h2>
-        <p className="mt-3 font-body text-[17px] text-light-gray">
+        <p className="mt-3 font-body text-[17px] text-[var(--text-secondary)]">
           Real feedback from real founders we&apos;ve worked with.
         </p>
       </motion.header>

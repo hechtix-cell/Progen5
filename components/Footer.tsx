@@ -45,19 +45,27 @@ export default function Footer() {
 
   return (
     <>
-      <footer className="w-full border-t border-[rgba(165,165,165,0.1)] bg-black px-6 py-10 pb-8 md:px-[80px] md:py-[60px] md:pb-10">
+      <footer className="w-full border-t border-[var(--border)] bg-[var(--bg-secondary)] px-6 py-10 pb-8 md:px-[80px] md:py-[60px] md:pb-10">
         <div className="mx-auto w-full max-w-[1100px]">
           {/* TOP ROW */}
           <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-12">
             {/* Column 1 — Brand */}
             <div className="lg:col-span-4">
-              <img src="/images/logo.svg" alt="Progen5" className="h-9 w-auto" />
+              <img
+                src="/images/logo.svg?v=3"
+                alt="Progen5"
+                style={{
+                  height: "36px",
+                  width: "auto",
+                  display: "block",
+                }}
+              />
 
-              <div className="mt-3 font-body text-[14px] text-light-gray">
+              <div className="mt-3 font-body text-[14px] text-[var(--text-secondary)]">
                 Turn your Vision into Reality
               </div>
 
-              <p className="mt-2 max-w-[260px] font-body text-[13px] leading-[1.7] text-light-gray">
+              <p className="mt-2 max-w-[260px] font-body text-[13px] leading-[1.7] text-[var(--text-secondary)]">
                 We are a startup execution agency helping non-technical founders
                 go from idea to launch.
               </p>
@@ -65,21 +73,21 @@ export default function Footer() {
               <div className="mt-5 flex items-center gap-4">
                 <a
                   href="#"
-                  className="text-light-gray transition-colors duration-200 hover:text-white"
+                  className="text-[var(--text-secondary)] transition-colors duration-200 hover:text-[var(--text-primary)]"
                   aria-label="Twitter"
                 >
                   <Twitter className="h-[18px] w-[18px]" />
                 </a>
                 <a
                   href="#"
-                  className="text-light-gray transition-colors duration-200 hover:text-white"
+                  className="text-[var(--text-secondary)] transition-colors duration-200 hover:text-[var(--text-primary)]"
                   aria-label="LinkedIn"
                 >
                   <Linkedin className="h-[18px] w-[18px]" />
                 </a>
                 <a
                   href="#"
-                  className="text-light-gray transition-colors duration-200 hover:text-white"
+                  className="text-[var(--text-secondary)] transition-colors duration-200 hover:text-[var(--text-primary)]"
                   aria-label="Instagram"
                 >
                   <Instagram className="h-[18px] w-[18px]" />
@@ -89,7 +97,7 @@ export default function Footer() {
 
             {/* Column 2 — Services */}
             <div className="lg:col-span-3">
-              <div className="mb-4 font-ui text-[13px] font-bold tracking-[1px] text-white">
+              <div className="mb-4 font-ui text-[13px] font-bold tracking-[1px] text-[var(--text-primary)]">
                 Services
               </div>
               <div className="flex flex-col gap-2.5">
@@ -97,7 +105,7 @@ export default function Footer() {
                   <a
                     key={label}
                     href="#services"
-                    className="font-body text-[14px] text-light-gray transition-colors duration-200 hover:text-white"
+                    className="font-body text-[14px] text-[var(--text-secondary)] transition-colors duration-200 hover:text-[var(--text-primary)]"
                   >
                     {label}
                   </a>
@@ -107,7 +115,7 @@ export default function Footer() {
 
             {/* Column 3 — Company */}
             <div className="lg:col-span-3">
-              <div className="mb-4 font-ui text-[13px] font-bold tracking-[1px] text-white">
+              <div className="mb-4 font-ui text-[13px] font-bold tracking-[1px] text-[var(--text-primary)]">
                 Company
               </div>
               <div className="flex flex-col gap-2.5">
@@ -115,7 +123,7 @@ export default function Footer() {
                   <a
                     key={link.label}
                     href={link.href}
-                    className="font-body text-[14px] text-light-gray transition-colors duration-200 hover:text-white"
+                    className="font-body text-[14px] text-[var(--text-secondary)] transition-colors duration-200 hover:text-[var(--text-primary)]"
                   >
                     {link.label}
                   </a>
@@ -125,19 +133,19 @@ export default function Footer() {
 
             {/* Column 4 — Contact */}
             <div className="lg:col-span-2">
-              <div className="mb-4 font-ui text-[13px] font-bold tracking-[1px] text-white">
+              <div className="mb-4 font-ui text-[13px] font-bold tracking-[1px] text-[var(--text-primary)]">
                 Contact
               </div>
               <div className="flex flex-col gap-2.5">
-                <div className="flex items-center gap-2 font-body text-[14px] text-light-gray">
+                <div className="flex items-center gap-2 font-body text-[14px] text-[var(--text-secondary)]">
                   <Mail className="h-[14px] w-[14px] text-blue" />
                   <span>hechtix@gmail.com</span>
                 </div>
-                <div className="flex items-center gap-2 font-body text-[14px] text-light-gray">
+                <div className="flex items-center gap-2 font-body text-[14px] text-[var(--text-secondary)]">
                   <Clock className="h-[14px] w-[14px] text-blue" />
                   <span>Reply within 24 hrs</span>
                 </div>
-                <div className="flex items-center gap-2 font-body text-[14px] text-light-gray">
+                <div className="flex items-center gap-2 font-body text-[14px] text-[var(--text-secondary)]">
                   <MapPin className="h-[14px] w-[14px] text-blue" />
                   <span>India</span>
                 </div>
@@ -146,17 +154,17 @@ export default function Footer() {
           </div>
 
           {/* Divider */}
-          <div className="my-10 h-px w-full bg-[rgba(165,165,165,0.08)]" />
+          <div className="my-10 h-px w-full bg-[var(--border)]" />
 
           {/* Bottom row */}
           <div className="flex flex-col items-center justify-between gap-3 text-center sm:flex-row sm:text-left">
-            <div className="font-body text-[13px] text-light-gray">
+            <div className="font-body text-[13px] text-[var(--text-secondary)]">
               © 2025 Progen5. All rights reserved.
             </div>
-            <div className="font-body text-[13px] italic text-light-gray">
+            <div className="font-body text-[13px] italic text-[var(--text-secondary)]">
               Execution over ideas. 🚀
             </div>
-            <div className="font-body text-[13px] text-light-gray">
+            <div className="font-body text-[13px] text-[var(--text-secondary)]">
               Built with ❤️ for founders
             </div>
           </div>

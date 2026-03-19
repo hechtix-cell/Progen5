@@ -2,212 +2,250 @@
 
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import { useEffect, useState } from "react";
-
-const BADGE_TEXT = "Startup Execution Agency";
 
 export default function Hero() {
-  const [typedText, setTypedText] = useState("");
-  const [showCursor, setShowCursor] = useState(false);
-
-  useEffect(() => {
-    let index = 0;
-    const interval = setInterval(() => {
-      index += 1;
-      setTypedText(BADGE_TEXT.slice(0, index));
-      if (index === BADGE_TEXT.length) {
-        clearInterval(interval);
-        setShowCursor(true);
-      }
-    }, 80);
-
-    const cursorTimeout = setTimeout(() => {
-      setShowCursor(false);
-    }, BADGE_TEXT.length * 80 + 3000);
-
-    return () => {
-      clearInterval(interval);
-      clearTimeout(cursorTimeout);
-    };
-  }, []);
-
-  const fadeUp = (delay: number) =>
-    ({
-      initial: { opacity: 0, y: 20 },
-      animate: { opacity: 1, y: 0 },
-      transition: { duration: 0.6, ease: "easeOut", delay },
-    }) as const;
-
-  const scrollToServices = () => {
-    const el = document.querySelector("#services");
-    el?.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
-
   return (
     <section
       id="hero"
-      className="relative min-h-screen w-full bg-black"
       style={{
-        backgroundImage:
-          "radial-gradient(circle, rgba(0,123,252,0.15) 1px, transparent 1px)",
-        backgroundSize: "30px 30px",
+        minHeight: "100vh",
+        background: "#000000",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        position: "relative",
+        overflow: "hidden",
+        padding: "0 80px",
       }}
     >
-      <style>
-        {`
-          @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-          }
-        `}
-      </style>
-
-      {/* Soft blue radial glow */}
+      {/* Dot grid background */}
       <div
-        className="pointer-events-none absolute inset-0"
         style={{
-          background:
-            "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(0,123,252,0.07) 0%, transparent 70%)",
+          position: "absolute",
+          inset: 0,
+          backgroundImage:
+            "radial-gradient(circle, rgba(0,123,252,0.15) 1px, transparent 1px)",
+          backgroundSize: "30px 30px",
+          zIndex: 0,
         }}
       />
 
-      <div className="relative flex min-h-screen w-full items-center justify-center px-6">
-        <div className="flex w-full max-w-[800px] flex-col items-center gap-6 text-center">
-          {/* Badge */}
-          <motion.div
-            {...fadeUp(0)}
-            className="inline-flex rounded-full border border-[rgba(0,123,252,0.3)] bg-[rgba(0,123,252,0.1)] px-4 py-[6px] font-ui text-[13px] text-blue"
+      {/* Blue glow */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          background:
+            "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(0,123,252,0.08) 0%, transparent 70%)",
+          zIndex: 0,
+        }}
+      />
+
+      {/* Content */}
+      <div
+        style={{
+          position: "relative",
+          zIndex: 1,
+          maxWidth: "800px",
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          textAlign: "center",
+          gap: "24px",
+        }}
+      >
+        {/* Badge */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0 }}
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "8px",
+            background: "rgba(0,123,252,0.1)",
+            border: "1px solid rgba(0,123,252,0.3)",
+            borderRadius: "999px",
+            padding: "6px 16px",
+            color: "#007BFC",
+            fontSize: "13px",
+            fontFamily: "General Sans, sans-serif",
+          }}
+        >
+          🚀 Startup Execution Agency
+        </motion.div>
+
+        {/* Headline */}
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          style={{
+            fontFamily: "Satoshi, sans-serif",
+            fontSize: "clamp(42px, 7vw, 72px)",
+            fontWeight: 800,
+            color: "#FFFFFF",
+            lineHeight: 1.1,
+            margin: 0,
+          }}
+        >
+          Turn your{" "}
+          <span style={{ color: "#007BFC" }}>Vision</span> into Reality
+        </motion.h1>
+
+        {/* Subheadline */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          style={{
+            fontFamily: "Inter, sans-serif",
+            fontSize: "18px",
+            color: "#A5A5A5",
+            lineHeight: 1.7,
+            maxWidth: "560px",
+            margin: 0,
+          }}
+        >
+          We handle design, development, branding and launch — so you can focus
+          on your idea.
+        </motion.p>
+
+        {/* Buttons */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          style={{
+            display: "flex",
+            gap: "16px",
+            flexWrap: "wrap",
+            justifyContent: "center",
+          }}
+        >
+          <a
+            href="#contact"
+            style={{
+              background: "#007BFC",
+              color: "#FFFFFF",
+              padding: "14px 32px",
+              borderRadius: "8px",
+              fontFamily: "General Sans, sans-serif",
+              fontSize: "15px",
+              fontWeight: 500,
+              textDecoration: "none",
+              transition: "opacity 200ms",
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
+            onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
           >
-            🚀 {typedText || BADGE_TEXT}
-            {showCursor ? (
+            Start Building →
+          </a>
+
+          <a
+            href="#services"
+            style={{
+              background: "transparent",
+              color: "#FFFFFF",
+              padding: "14px 32px",
+              borderRadius: "8px",
+              border: "1px solid rgba(165,165,165,0.4)",
+              fontFamily: "General Sans, sans-serif",
+              fontSize: "15px",
+              textDecoration: "none",
+              transition: "border-color 200ms",
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.borderColor = "#FFFFFF")}
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.borderColor =
+                "rgba(165,165,165,0.4)")
+            }
+          >
+            See Our Work
+          </a>
+        </motion.div>
+
+        {/* Stats */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "40px",
+            background: "rgba(255,255,255,0.03)",
+            border: "1px solid rgba(165,165,165,0.1)",
+            borderRadius: "12px",
+            padding: "20px 40px",
+            marginTop: "8px",
+          }}
+        >
+          {[
+            { number: "10+", label: "Projects Launched" },
+            { number: "2–4 Weeks", label: "MVP Delivery" },
+            { number: "7 Packages", label: "To Fit Your Budget" },
+          ].map((stat, i) => (
+            <div
+              key={i}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: "4px",
+                borderRight:
+                  i < 2 ? "1px solid rgba(165,165,165,0.15)" : "none",
+                paddingRight: i < 2 ? "40px" : "0",
+              }}
+            >
               <span
                 style={{
-                  marginLeft: "2px",
-                  animation: "blink 1s infinite",
+                  fontFamily: "Exo 2, sans-serif",
+                  fontSize: "28px",
+                  fontWeight: 800,
+                  color: "#FFFFFF",
                 }}
               >
-                |
+                {stat.number}
               </span>
-            ) : null}
-          </motion.div>
-
-          {/* Headline */}
-          <motion.h1
-            {...fadeUp(0.1)}
-            className="font-heading text-[42px] font-extrabold leading-[1.1] text-white md:text-[72px]"
-          >
-            Turn your <span className="text-blue">Vision</span> into Reality
-          </motion.h1>
-
-          {/* Subheadline */}
-          <motion.p
-            {...fadeUp(0.2)}
-            className="mx-auto max-w-[560px] font-body text-[16px] leading-[1.7] text-light-gray md:text-[18px]"
-          >
-            We handle design, development, branding and launch — so you can focus
-            on your idea.
-          </motion.p>
-
-          {/* CTA Buttons */}
-          <motion.div
-            {...fadeUp(0.3)}
-            className="flex w-full flex-col items-center justify-center gap-3 sm:flex-row"
-          >
-            <a
-              href="#contact"
-              className="inline-flex w-full items-center justify-center rounded-btn bg-blue px-8 py-[14px] font-ui text-[15px] font-medium text-white transition duration-200 hover:scale-[1.02] hover:opacity-85 sm:w-auto"
-            >
-              Start Building →
-            </a>
-            <a
-              href="#"
-              className="inline-flex w-full items-center justify-center rounded-btn border border-[rgba(165,165,165,0.4)] bg-transparent px-8 py-[14px] font-ui text-[15px] text-white transition duration-200 hover:border-white sm:w-auto"
-            >
-              See Our Work
-            </a>
-          </motion.div>
-
-          {/* Stats bar */}
-          <motion.div
-            {...fadeUp(0.4)}
-            className="mt-6 w-full rounded-card border border-[rgba(165,165,165,0.15)] bg-[rgba(0,0,0,0.35)] px-6 py-5 backdrop-blur-sm"
-          >
-            {/* Mobile: 3-column grid (no dividers) */}
-            <div className="grid grid-cols-3 gap-4 md:hidden">
-              <div className="flex flex-col items-center">
-                <div className="font-accent text-[28px] font-bold text-white">
-                  10+
-                </div>
-                <div className="font-body text-[13px] text-light-gray">
-                  Projects Launched
-                </div>
-              </div>
-              <div className="flex flex-col items-center">
-                <div className="font-accent text-[28px] font-bold text-white">
-                  2–4 Weeks
-                </div>
-                <div className="font-body text-[13px] text-light-gray">
-                  MVP Delivery
-                </div>
-              </div>
-              <div className="flex flex-col items-center">
-                <div className="font-accent text-[28px] font-bold text-white">
-                  5 Packages
-                </div>
-                <div className="font-body text-[13px] text-light-gray">
-                  To Fit Your Budget
-                </div>
-              </div>
+              <span
+                style={{
+                  fontFamily: "Inter, sans-serif",
+                  fontSize: "13px",
+                  color: "#A5A5A5",
+                }}
+              >
+                {stat.label}
+              </span>
             </div>
-
-            {/* Desktop: row with dividers */}
-            <div className="hidden items-center justify-center md:flex">
-              <div className="flex flex-col items-center px-6">
-                <div className="font-accent text-[28px] font-bold text-white">
-                  10+
-                </div>
-                <div className="font-body text-[13px] text-light-gray">
-                  Projects Launched
-                </div>
-              </div>
-
-              <div className="h-10 w-px bg-[rgba(165,165,165,0.15)]" />
-
-              <div className="flex flex-col items-center px-6">
-                <div className="font-accent text-[28px] font-bold text-white">
-                  2–4 Weeks
-                </div>
-                <div className="font-body text-[13px] text-light-gray">
-                  MVP Delivery
-                </div>
-              </div>
-
-              <div className="h-10 w-px bg-[rgba(165,165,165,0.15)]" />
-
-              <div className="flex flex-col items-center px-6">
-                <div className="font-accent text-[28px] font-bold text-white">
-                  5 Packages
-                </div>
-                <div className="font-body text-[13px] text-light-gray">
-                  To Fit Your Budget
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </div>
+          ))}
+        </motion.div>
       </div>
 
       {/* Scroll indicator */}
-      <motion.button
-        type="button"
-        aria-label="Scroll to services"
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-light-gray"
-        onClick={scrollToServices}
+      <motion.div
         animate={{ y: [0, 8, 0] }}
-        transition={{ duration: 1.5, repeat: Infinity }}
+        transition={{
+          duration: 1.5,
+          repeat: Infinity,
+        }}
+        style={{
+          position: "absolute",
+          bottom: "32px",
+          left: "50%",
+          transform: "translateX(-50%)",
+          cursor: "pointer",
+          zIndex: 1,
+        }}
+        onClick={() => {
+          document.getElementById("services")?.scrollIntoView({
+            behavior: "smooth",
+          });
+        }}
       >
-        <ChevronDown className="h-6 w-6" />
-      </motion.button>
+        <ChevronDown size={24} color="#A5A5A5" />
+      </motion.div>
     </section>
   );
 }

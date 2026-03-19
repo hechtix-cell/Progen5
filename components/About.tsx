@@ -56,7 +56,7 @@ export default function About() {
   return (
     <section
       id="about"
-      className="w-full bg-[#0a0a0a] px-6 py-20 md:px-[80px] md:py-[120px]"
+      className="w-full bg-[var(--bg-primary)] px-6 py-20 md:px-[80px] md:py-[120px]"
     >
       <div className="mx-auto grid w-full max-w-[1100px] grid-cols-1 gap-10 md:grid-cols-2 md:gap-12">
         {/* LEFT */}
@@ -71,23 +71,23 @@ export default function About() {
             WHO WE ARE
           </div>
 
-          <h2 className="mt-3 font-heading text-[32px] font-extrabold leading-[1.2] text-white md:text-[44px]">
+          <h2 className="mt-3 font-heading text-[32px] font-extrabold leading-[1.2] text-[var(--text-primary)] md:text-[44px]">
             We Are Your Execution Partner
           </h2>
 
-          <p className="mt-5 font-body text-[16px] leading-[1.8] text-light-gray">
+          <p className="mt-5 font-body text-[16px] leading-[1.8] text-[var(--text-secondary)]">
             Progen5 is not just a design or development agency. We are a startup
             execution partner that takes your idea and builds it into a real,
             launched product.
           </p>
 
-          <p className="mt-5 font-body text-[16px] leading-[1.8] text-light-gray">
+          <p className="mt-5 font-body text-[16px] leading-[1.8] text-[var(--text-secondary)]">
             Non-technical founders shouldn&apos;t have to juggle multiple vendors. We
             handle everything — design, development, branding, and launch — under
             one roof, at startup-friendly prices.
           </p>
 
-          <div className="mt-7 border-l-[3px] border-blue pl-4 font-heading text-[18px] italic text-white">
+          <div className="mt-7 border-l-[3px] border-blue pl-4 font-heading text-[18px] italic text-[var(--text-primary)]">
             Our mission: Help founders go from idea to launch faster.
           </div>
 
@@ -111,13 +111,13 @@ export default function About() {
             <motion.div
               key={card.title}
               variants={cardVariants}
-              className="rounded-card border border-[rgba(165,165,165,0.1)] bg-dark-gray p-7 transition-colors duration-200 hover:border-[rgba(0,123,252,0.4)]"
+              className="card-surface rounded-card p-7 transition-colors duration-200 hover:border-[rgba(0,123,252,0.4)]"
             >
               <card.Icon className="h-6 w-6 text-blue" />
-              <div className="mt-4 font-heading text-[17px] font-bold text-white">
+              <div className="mt-4 font-heading text-[17px] font-bold text-[var(--text-primary)]">
                 {card.title}
               </div>
-              <p className="mt-2 font-body text-[14px] leading-[1.6] text-light-gray">
+              <p className="mt-2 font-body text-[14px] leading-[1.6] text-[var(--text-secondary)]">
                 {card.description}
               </p>
             </motion.div>

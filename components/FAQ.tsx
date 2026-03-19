@@ -101,7 +101,7 @@ export default function FAQ() {
   return (
     <section
       id="faq"
-      className="w-full bg-[#0a0a0a] px-6 py-20 md:px-[80px] md:py-[120px]"
+      className="w-full bg-[var(--bg-secondary)] px-6 py-20 md:px-[80px] md:py-[120px]"
     >
       <motion.header
         className="mx-auto flex max-w-[800px] flex-col items-center text-center"
@@ -111,10 +111,10 @@ export default function FAQ() {
         viewport={{ once: true }}
       >
         <div className="font-ui text-[12px] tracking-[3px] text-blue">FAQ</div>
-        <h2 className="mt-3 font-heading text-[34px] font-extrabold text-white md:text-[48px]">
+        <h2 className="mt-3 font-heading text-[34px] font-extrabold text-[var(--text-primary)] md:text-[48px]">
           Got Questions?
         </h2>
-        <p className="mt-3 font-body text-[17px] text-light-gray">
+        <p className="mt-3 font-body text-[17px] text-[var(--text-secondary)]">
           Everything you need to know before getting started.
         </p>
       </motion.header>
@@ -131,8 +131,7 @@ export default function FAQ() {
               whileInView="show"
               viewport={{ once: true }}
               className={[
-                "overflow-hidden rounded-card border bg-dark-gray transition-all duration-200",
-                "border-[rgba(165,165,165,0.1)]",
+                "card-surface overflow-hidden rounded-card transition-all duration-200",
                 isOpen
                   ? "border-[rgba(0,123,252,0.4)] shadow-[0_0_20px_rgba(0,123,252,0.05)]"
                   : "",
@@ -143,12 +142,12 @@ export default function FAQ() {
                 onClick={() => toggle(index)}
                 className="flex w-full items-center justify-between px-7 py-6 text-left"
               >
-                <span className="font-heading text-[17px] font-bold text-white transition-colors duration-200 hover:text-blue">
+                <span className="font-heading text-[17px] font-bold text-[var(--text-primary)] transition-colors duration-200 hover:text-blue">
                   {faq.question}
                 </span>
                 <ChevronDown
                   className={[
-                    "h-5 w-5 text-light-gray transition-transform duration-300 ease-out",
+                    "h-5 w-5 text-[var(--text-secondary)] transition-transform duration-300 ease-out",
                     isOpen ? "rotate-180" : "",
                   ].join(" ")}
                 />
@@ -163,7 +162,7 @@ export default function FAQ() {
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.3, ease: "easeInOut" }}
                   >
-                    <div className="px-7 pb-6 font-body text-[15px] leading-[1.8] text-light-gray">
+                    <div className="px-7 pb-6 font-body text-[15px] leading-[1.8] text-[var(--text-secondary)]">
                       {faq.answer}
                     </div>
                   </motion.div>
@@ -175,10 +174,10 @@ export default function FAQ() {
       </div>
 
       <div className="mx-auto mt-[60px] max-w-[600px] rounded-[16px] border border-[rgba(0,123,252,0.3)] bg-[#0d1929] p-8 text-center md:p-12">
-        <div className="font-heading text-[28px] font-bold text-white">
+        <div className="font-heading text-[28px] font-bold text-[var(--text-primary)]">
           Still have questions?
         </div>
-        <p className="mt-3 font-body text-[16px] text-light-gray">
+        <p className="mt-3 font-body text-[16px] text-[var(--text-secondary)]">
           We&apos;re happy to answer anything. Just reach out directly.
         </p>
 

@@ -43,11 +43,11 @@ export default function Contact() {
       [
         "w-full",
         "rounded-btn",
-        "border border-[rgba(165,165,165,0.15)]",
-        "bg-[rgba(255,255,255,0.04)]",
+        "border border-[var(--border)]",
+        "bg-[var(--bg-secondary)]",
         "px-4 py-[14px]",
-        "font-body text-[15px] text-white",
-        "placeholder:text-light-gray/60",
+        "font-body text-[15px] text-[var(--text-primary)]",
+        "placeholder:text-[var(--text-secondary)]/60",
         "transition duration-200",
         "focus:border-blue focus:shadow-[0_0_0_3px_rgba(0,123,252,0.1)] focus:outline-none",
       ].join(" "),
@@ -90,7 +90,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="w-full bg-[#0a0a0a] px-6 py-20 md:px-[80px] md:py-[120px]"
+      className="w-full bg-[var(--bg-primary)] px-6 py-20 md:px-[80px] md:py-[120px]"
     >
       <div className="mx-auto grid w-full max-w-[1100px] grid-cols-1 gap-12 md:grid-cols-2 md:gap-[60px]">
         {/* LEFT */}
@@ -105,35 +105,35 @@ export default function Contact() {
             GET IN TOUCH
           </div>
 
-          <h2 className="mt-3 font-heading text-[32px] font-extrabold text-white md:text-[44px]">
+          <h2 className="mt-3 font-heading text-[32px] font-extrabold text-[var(--text-primary)] md:text-[44px]">
             Let&apos;s Build Your Startup
           </h2>
 
-          <p className="mt-4 font-body text-[16px] leading-[1.8] text-light-gray">
+          <p className="mt-4 font-body text-[16px] leading-[1.8] text-[var(--text-secondary)]">
             Book a free consultation and get a free prototype. No commitment
             required.
           </p>
 
           <div className="mt-5 flex flex-col gap-3">
-            <div className="flex items-center gap-3 font-body text-[15px] text-light-gray">
+            <div className="flex items-center gap-3 font-body text-[15px] text-[var(--text-secondary)]">
               <Mail className="h-[18px] w-[18px] text-blue" />
               <span>hechtix@gmail.com</span>
             </div>
-            <div className="flex items-center gap-3 font-body text-[15px] text-light-gray">
+            <div className="flex items-center gap-3 font-body text-[15px] text-[var(--text-secondary)]">
               <MessageCircle className="h-[18px] w-[18px] text-blue" />
               <span>Free consultation call included</span>
             </div>
-            <div className="flex items-center gap-3 font-body text-[15px] text-light-gray">
+            <div className="flex items-center gap-3 font-body text-[15px] text-[var(--text-secondary)]">
               <Clock className="h-[18px] w-[18px] text-blue" />
               <span>Response within 24 hours</span>
             </div>
           </div>
 
-          <div className="mt-8 rounded-card border border-[rgba(165,165,165,0.1)] bg-dark-gray p-6">
-            <div className="font-heading text-[15px] font-bold text-white">
+          <div className="card-surface mt-8 rounded-card p-6">
+            <div className="font-heading text-[15px] font-bold text-[var(--text-primary)]">
               What happens after you submit?
             </div>
-            <div className="mt-4 flex flex-col gap-[10px] font-body text-[14px] text-light-gray">
+            <div className="mt-4 flex flex-col gap-[10px] font-body text-[14px] text-[var(--text-secondary)]">
               <div>📞 We call you within 24 hours</div>
               <div>🎯 We understand your idea</div>
               <div>🚀 We send a free proposal</div>
@@ -147,7 +147,7 @@ export default function Contact() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="rounded-[16px] border border-[rgba(165,165,165,0.1)] bg-dark-gray p-6 md:p-10"
+          className="card-surface rounded-[16px] p-6 md:p-10"
         >
           <div className="flex flex-col gap-4">
             {/* Row 1 */}
@@ -201,34 +201,43 @@ export default function Contact() {
               }
               className={fieldClasses}
             >
-              <option value="" className="bg-black text-white">
+              <option value="" className="bg-[var(--bg-primary)] text-[var(--text-primary)]">
                 Select a package...
               </option>
-              <option value="Starter — ₹5K–₹10K" className="bg-black text-white">
+              <option
+                value="Starter — ₹5K–₹10K"
+                className="bg-[var(--bg-primary)] text-[var(--text-primary)]"
+              >
                 Starter — ₹5K–₹10K
               </option>
               <option
                 value="Design Package — ₹15K–₹25K"
-                className="bg-black text-white"
+                className="bg-[var(--bg-primary)] text-[var(--text-primary)]"
               >
                 Design Package — ₹15K–₹25K
               </option>
-              <option value="MVP Build — ₹25K–₹35K" className="bg-black text-white">
+              <option
+                value="MVP Build — ₹25K–₹35K"
+                className="bg-[var(--bg-primary)] text-[var(--text-primary)]"
+              >
                 MVP Build — ₹25K–₹35K
               </option>
               <option
                 value="MVP + Design — ₹35K–₹45K"
-                className="bg-black text-white"
+                className="bg-[var(--bg-primary)] text-[var(--text-primary)]"
               >
                 MVP + Design — ₹35K–₹45K
               </option>
               <option
                 value="Ultra Premium — ₹45K–₹50K"
-                className="bg-black text-white"
+                className="bg-[var(--bg-primary)] text-[var(--text-primary)]"
               >
                 Ultra Premium — ₹45K–₹50K
               </option>
-              <option value="Not sure yet" className="bg-black text-white">
+              <option
+                value="Not sure yet"
+                className="bg-[var(--bg-primary)] text-[var(--text-primary)]"
+              >
                 Not sure yet
               </option>
             </select>
@@ -250,7 +259,7 @@ export default function Contact() {
             {/* Submit */}
             <div className="mt-2">
               {isSubmitted ? (
-                <div className="text-center font-body text-[15px] text-light-gray">
+                <div className="text-center font-body text-[15px] text-[var(--text-secondary)]">
                   ✅ Submitted! We&apos;ll reach out within 24 hours.
                 </div>
               ) : (
