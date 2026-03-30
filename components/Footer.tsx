@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   ArrowUp,
@@ -51,14 +52,13 @@ export default function Footer() {
           <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-12">
             {/* Column 1 — Brand */}
             <div className="lg:col-span-4">
-              <img
-                src="/images/logo.svg?v=3"
+              <Image
+                src="/images/logo.svg"
                 alt="Progen5"
-                style={{
-                  height: "36px",
-                  width: "auto",
-                  display: "block",
-                }}
+                width={120}
+                height={36}
+                unoptimized
+                style={{ width: "auto", height: "36px" }}
               />
 
               <div className="mt-3 font-body text-[14px] text-[var(--text-secondary)]">

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, Moon, Sun, X } from "lucide-react";
@@ -44,14 +45,14 @@ export default function Navbar() {
         {/* LEFT */}
         <a href="#hero" className="flex items-center">
           <div style={{ display: "flex", alignItems: "center", padding: "0px" }}>
-            <img
+            <Image
               src="/images/logo.svg?v=3"
               alt="Progen5"
-              style={{
-                height: "55px",
-                width: "auto",
-                display: "block",
-              }}
+              width={140}
+              height={55}
+              unoptimized
+              priority
+              style={{ width: "auto", height: "55px" }}
             />
           </div>
         </a>
