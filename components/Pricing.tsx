@@ -101,6 +101,14 @@ const PLANS: readonly Plan[] = [
   },
 ] as const;
 
+const ROW_ONE: readonly Plan[] = [
+  PLANS[0],
+  PLANS[1],
+  PLANS[2],
+  PLANS[3],
+];
+const ROW_TWO: readonly Plan[] = [PLANS[4], PLANS[5], PLANS[6]];
+
 const headerVariants = {
   hidden: { opacity: 0, y: 40 },
   show: {
@@ -138,6 +146,72 @@ function Price({ value }: { value: string }) {
         {value}
       </span>
     </div>
+  );
+}
+
+function PricingCard({ plan }: { plan: Plan }) {
+  const isRecommended = Boolean(plan.recommended);
+  return (
+    <motion.div
+      variants={cardVariants}
+      className={[
+        "relative flex min-h-[420px] w-full flex-col break-words rounded-card p-[28px] transition-transform duration-200 ease-out hover:-translate-y-2",
+        "pricing-card card-surface",
+        isRecommended ? "overflow-visible pt-[20px] lg:mt-[20px]" : "overflow-hidden",
+        isRecommended
+          ? "border-2 border-blue bg-[#0d1929] shadow-[0_0_32px_rgba(0,123,252,0.15)] lg:scale-[1.02] pricing-glow"
+          : "",
+      ].join(" ")}
+    >
+      {isRecommended ? (
+        <div className="absolute top-[-16px] left-1/2 z-10 -translate-x-1/2 whitespace-nowrap rounded-full bg-blue px-4 py-1 font-ui text-[12px] font-bold text-white">
+          Most Popular
+        </div>
+      ) : null}
+
+      <div className="truncate font-ui text-[11px] uppercase tracking-[1.5px] text-[var(--text-secondary)]">
+        {plan.name}
+      </div>
+
+      {plan.name === "AI CHATBOT" ? (
+        <div className="mt-2 inline-flex rounded-full border border-[rgba(0,123,252,0.3)] bg-[rgba(0,123,252,0.1)] px-[10px] py-[3px] font-ui text-[11px] text-blue">
+          🤖 AI Powered
+        </div>
+      ) : null}
+
+      <Price value={plan.price} />
+
+      <div className="mt-1 font-body text-[13px] text-[var(--text-secondary)]">
+        {plan.subtext}
+      </div>
+
+      <div className="my-5 h-px w-full bg-[var(--border)]" />
+
+      <ul className="mb-6 flex-1 space-y-3">
+        {plan.features.map((feature) => (
+          <li
+            key={feature}
+            className="flex items-start gap-[10px] font-body text-[14px] text-[var(--text-secondary)]"
+          >
+            <CheckCircle2 className="mt-[3px] h-[15px] w-[15px] flex-none text-blue" />
+            <span>{feature}</span>
+          </li>
+        ))}
+      </ul>
+
+      <a
+        href="#contact"
+        className={[
+          "mt-auto inline-flex w-full items-center justify-center rounded-btn px-3 py-3",
+          "font-ui text-[14px] transition duration-200",
+          isRecommended
+            ? "bg-blue text-white hover:opacity-85"
+            : "border border-[rgba(0,123,252,0.5)] bg-transparent text-blue hover:bg-blue hover:text-white",
+        ].join(" ")}
+      >
+        Get Started
+      </a>
+    </motion.div>
   );
 }
 
@@ -188,74 +262,43 @@ export default function Pricing() {
         whileInView="show"
         viewport={{ once: true }}
       >
-        <div className="grid grid-cols-1 gap-3 overflow-visible md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7">
-          {PLANS.map((plan) => {
-            const isRecommended = Boolean(plan.recommended);
-            return (
-              <motion.div
-                key={plan.name}
-                variants={cardVariants}
-                className={[
-                  "relative flex h-full min-w-[200px] flex-col break-words rounded-card p-8 transition-transform duration-200 ease-out hover:-translate-y-2",
-                  "pricing-card card-surface",
-                  "w-full md:max-w-[220px]",
-                  isRecommended ? "overflow-visible mt-[20px] pt-[20px]" : "overflow-hidden",
-                  isRecommended
-                    ? "border-2 border-blue bg-[#0d1929] shadow-[0_0_32px_rgba(0,123,252,0.15)] md:scale-[1.03] pricing-glow"
-                    : "",
-                ].join(" ")}
-              >
-                {isRecommended ? (
-                  <div className="absolute top-[-16px] left-1/2 z-10 -translate-x-1/2 whitespace-nowrap rounded-full bg-blue px-4 py-1 font-ui text-[12px] font-bold text-white">
-                    Most Popular
-                  </div>
-                ) : null}
+        {/* Mobile & tablet: single grid — 1 col mobile, 2 cols 768–1023 */}
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:hidden">
+          {PLANS.map((plan) => (
+            <PricingCard key={plan.name} plan={plan} />
+          ))}
+        </div>
 
-                <div className="truncate font-ui text-[11px] uppercase tracking-[1.5px] text-[var(--text-secondary)]">
-                  {plan.name}
-                </div>
-
-                {plan.name === "AI CHATBOT" ? (
-                  <div className="mt-2 inline-flex rounded-full border border-[rgba(0,123,252,0.3)] bg-[rgba(0,123,252,0.1)] px-[10px] py-[3px] font-ui text-[11px] text-blue">
-                    🤖 AI Powered
-                  </div>
-                ) : null}
-
-                <Price value={plan.price} />
-
-                <div className="mt-1 font-body text-[13px] text-[var(--text-secondary)]">
-                  {plan.subtext}
-                </div>
-
-                <div className="my-5 h-px w-full bg-[var(--border)]" />
-
-                <ul className="mb-6 space-y-3">
-                  {plan.features.map((feature) => (
-                    <li
-                      key={feature}
-                      className="flex items-start gap-[10px] font-body text-[14px] text-[var(--text-secondary)]"
-                    >
-                      <CheckCircle2 className="mt-[3px] h-[15px] w-[15px] flex-none text-blue" />
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <a
-                  href="#contact"
-                  className={[
-                    "mt-auto inline-flex w-full items-center justify-center rounded-btn px-3 py-3",
-                    "font-ui text-[14px] transition duration-200",
-                    isRecommended
-                      ? "bg-blue text-white hover:opacity-85"
-                      : "border border-[rgba(0,123,252,0.5)] bg-transparent text-blue hover:bg-blue hover:text-white",
-                  ].join(" ")}
-                >
-                  Get Started
-                </a>
-              </motion.div>
-            );
-          })}
+        {/* Desktop (lg+): two rows — 4 + 3 centered */}
+        <div className="hidden flex-col gap-0 lg:flex">
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(4, 1fr)",
+              gap: "20px",
+              width: "100%",
+              maxWidth: "1100px",
+              margin: "0 auto",
+            }}
+          >
+            {ROW_ONE.map((plan) => (
+              <PricingCard key={plan.name} plan={plan} />
+            ))}
+          </div>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(3, 1fr)",
+              gap: "20px",
+              width: "75%",
+              maxWidth: "825px",
+              margin: "20px auto 0",
+            }}
+          >
+            {ROW_TWO.map((plan) => (
+              <PricingCard key={plan.name} plan={plan} />
+            ))}
+          </div>
         </div>
       </motion.div>
 
@@ -268,4 +311,3 @@ export default function Pricing() {
     </section>
   );
 }
-
