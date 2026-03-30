@@ -164,7 +164,16 @@ function PricingCard({ plan }: { plan: Plan }) {
       ].join(" ")}
     >
       {isRecommended ? (
-        <div className="absolute top-[-16px] left-1/2 z-10 -translate-x-1/2 whitespace-nowrap rounded-full bg-blue px-4 py-1 font-ui text-[12px] font-bold text-white">
+        <div
+          className="whitespace-nowrap rounded-full bg-blue px-4 py-1 font-ui text-[12px] font-bold text-white"
+          style={{
+            position: "absolute",
+            top: "-14px",
+            left: "50%",
+            transform: "translateX(-50%)",
+            zIndex: 10,
+          }}
+        >
           Most Popular
         </div>
       ) : null}
@@ -256,48 +265,57 @@ export default function Pricing() {
       </style>
 
       <motion.div
-        className="mx-auto mt-[60px] max-w-[1200px] overflow-visible pt-[20px]"
+        className="mx-auto mt-[60px] max-w-[1200px] overflow-visible"
         variants={listVariants}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true }}
       >
-        {/* Mobile & tablet: single grid — 1 col mobile, 2 cols 768–1023 */}
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:hidden">
-          {PLANS.map((plan) => (
-            <PricingCard key={plan.name} plan={plan} />
-          ))}
-        </div>
-
-        {/* Desktop (lg+): two rows — 4 + 3 centered */}
-        <div className="hidden flex-col gap-0 lg:flex">
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(4, 1fr)",
-              gap: "20px",
-              width: "100%",
-              maxWidth: "1100px",
-              margin: "0 auto",
-            }}
-          >
-            {ROW_ONE.map((plan) => (
+        <div
+          style={{
+            width: "100%",
+            overflow: "visible",
+            paddingTop: "30px",
+          }}
+        >
+          {/* Mobile (&lt;768): 1 col — Tablet (768–1023): 2 cols */}
+          <div className="grid w-full grid-cols-1 gap-5 md:grid-cols-2 lg:hidden">
+            {PLANS.map((plan) => (
               <PricingCard key={plan.name} plan={plan} />
             ))}
           </div>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(3, 1fr)",
-              gap: "20px",
-              width: "75%",
-              maxWidth: "825px",
-              margin: "20px auto 0",
-            }}
-          >
-            {ROW_TWO.map((plan) => (
-              <PricingCard key={plan.name} plan={plan} />
-            ))}
+
+          {/* Desktop (lg+): two rows — 4 + 3 centered */}
+          <div className="hidden flex-col gap-0 lg:flex">
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(4, 1fr)",
+                gap: "20px",
+                width: "100%",
+                maxWidth: "1100px",
+                margin: "0 auto",
+              }}
+            >
+              {ROW_ONE.map((plan) => (
+                <PricingCard key={plan.name} plan={plan} />
+              ))}
+            </div>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(3, 1fr)",
+                gap: "20px",
+                width: "75%",
+                maxWidth: "825px",
+                margin: "20px auto 0",
+                paddingTop: "20px",
+              }}
+            >
+              {ROW_TWO.map((plan) => (
+                <PricingCard key={plan.name} plan={plan} />
+              ))}
+            </div>
           </div>
         </div>
       </motion.div>
