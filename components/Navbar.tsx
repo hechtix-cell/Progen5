@@ -49,7 +49,7 @@ export default function Navbar() {
               src="/images/logo.svg?v=3"
               alt="Progen5"
               width={140}
-              height={55}
+              height={140}
               unoptimized
               priority
               style={{ width: "auto", height: "55px" }}
