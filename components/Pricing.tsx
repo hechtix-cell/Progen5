@@ -14,7 +14,7 @@ type Plan = {
 const PLANS: readonly Plan[] = [
   {
     name: "BASIC WEBSITE",
-    price: "₹9,999/-",
+    price: "₹9,999",
     subtext: "Perfect to get started",
     features: [
       "Professional website design",
