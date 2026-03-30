@@ -129,8 +129,8 @@ body {
   --chat--toggle--color: #ffffff;
   --chat--toggle--size: 56px;
 
-  --chat--input--background: #232227;
-  --chat--input--text-color: #ffffff;
+  --chat--input--background: #ffffff;
+  --chat--input--text-color: #000000;
   --chat--border-radius: 12px;
 }
 
