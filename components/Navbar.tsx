@@ -58,7 +58,7 @@ export default function Navbar() {
             src="/images/logo.svg"
             alt="Progen5"
             style={{
-              height: "55px",
+              height: "130px",
               width: "auto",
             }}
           />
