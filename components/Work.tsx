@@ -1,9 +1,9 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { ExternalLink } from "lucide-react";
 import type React from "react";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 type ProjectCategory = "Website" | "MVP" | "Landing Page" | "Branding";
 
@@ -17,6 +17,13 @@ type Project = {
   tech: string[];
   link: string;
   featured: boolean;
+  timeToComplete?: string;
+  clientReview?: {
+    text: string;
+    name: string;
+    role: string;
+  };
+  services?: string[];
 };
 
 const projects: Project[] = [
@@ -35,6 +42,19 @@ const projects: Project[] = [
     tech: ["Next.js", "Tailwind", "n8n"],
     link: "https://progen5.vercel.app",
     featured: true,
+    timeToComplete: "2 Weeks",
+    services: [
+      "UI/UX Design",
+      "Frontend Development",
+      "Animations",
+      "AI Chatbot Integration",
+      "Deployment",
+    ],
+    clientReview: {
+      text: "Progen5 built an amazing website that perfectly represents our brand. The animations and dark theme look absolutely stunning!",
+      name: "Vivek Nairy",
+      role: "Founder, Progen5",
+    },
   },
   {
     id: 2,
@@ -47,6 +67,18 @@ const projects: Project[] = [
     tech: ["Next.js", "Framer Motion"],
     link: "#",
     featured: false,
+    timeToComplete: "1 Week",
+    services: [
+      "Landing Page Design",
+      "Frontend Development",
+      "Mobile Responsive",
+      "Lead Capture Setup",
+    ],
+    clientReview: {
+      text: "The landing page they built for us was exactly what we needed. Clean, fast and converts really well!",
+      name: "Client Name",
+      role: "Founder, LettrBlack",
+    },
   },
   {
     id: 3,
@@ -63,6 +95,19 @@ const projects: Project[] = [
     tech: ["React", "Node.js", "MongoDB"],
     link: "#",
     featured: false,
+    timeToComplete: "4 Weeks",
+    services: [
+      "Product Strategy",
+      "UI/UX Design",
+      "Frontend + Backend Development",
+      "Payment Integration",
+      "QA & Launch",
+    ],
+    clientReview: {
+      text: "They shipped our MVP fast without compromising quality. The team handled everything end-to-end.",
+      name: "Ankit Sharma",
+      role: "Founder, CommerceFlow",
+    },
   },
   {
     id: 4,
@@ -75,6 +120,18 @@ const projects: Project[] = [
     tech: ["Next.js", "Firebase"],
     link: "#",
     featured: false,
+    timeToComplete: "3 Weeks",
+    services: [
+      "Dashboard Design",
+      "Data Visualization",
+      "Frontend Development",
+      "Auth & Permissions",
+    ],
+    clientReview: {
+      text: "The dashboard looks premium and is super easy for our team to use daily.",
+      name: "Riya Mehta",
+      role: "Product Lead, TaskPilot",
+    },
   },
   {
     id: 5,
@@ -87,6 +144,18 @@ const projects: Project[] = [
     tech: ["Figma", "Illustrator"],
     link: "#",
     featured: false,
+    timeToComplete: "10 Days",
+    services: [
+      "Brand Discovery",
+      "Logo System",
+      "Color & Typography",
+      "Brand Guidelines",
+    ],
+    clientReview: {
+      text: "Our new brand identity finally feels like us. Clean, modern, and memorable.",
+      name: "Karan Batra",
+      role: "Founder, Finora",
+    },
   },
   {
     id: 6,
@@ -103,6 +172,19 @@ const projects: Project[] = [
     tech: ["React", "Firebase", "Stripe"],
     link: "#",
     featured: false,
+    timeToComplete: "5 Weeks",
+    services: [
+      "MVP Planning",
+      "Learning Experience Design",
+      "Course Platform Development",
+      "Payments Setup",
+      "Deployment",
+    ],
+    clientReview: {
+      text: "They understood the EdTech space well and delivered a stable platform our students love.",
+      name: "Sneha Rao",
+      role: "Founder, SkillNest",
+    },
   },
 ];
 
@@ -130,6 +212,8 @@ function initialsFromName(name: string) {
 export default function Work() {
   const [activeFilter, setActiveFilter] = useState<FilterKey>("All");
   const [currentImage, setCurrentImage] = useState<{ [key: number]: number }>({});
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [currentModalImage, setCurrentModalImage] = useState(0);
 
   const getImageIndex = (projectId: number) => currentImage[projectId] || 0;
 
@@ -150,6 +234,38 @@ export default function Work() {
       [projectId]: ((prev[projectId] || 0) - 1 + totalImages) % totalImages,
     }));
   };
+
+  const openModal = (project: Project) => {
+    setSelectedProject(project);
+    setCurrentModalImage(0);
+    document.body.style.overflow = "hidden";
+  };
+
+  const closeModal = () => {
+    setSelectedProject(null);
+    setCurrentModalImage(0);
+    document.body.style.overflow = "auto";
+  };
+
+  useEffect(() => {
+    if (!selectedProject) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setSelectedProject(null);
+        setCurrentModalImage(0);
+        document.body.style.overflow = "auto";
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [selectedProject]);
+
+  useEffect(
+    () => () => {
+      document.body.style.overflow = "auto";
+    },
+    []
+  );
 
   const featuredProject = projects.find((project) => project.featured) ?? projects[0];
 
@@ -261,7 +377,9 @@ export default function Work() {
               style={{
                 background: "#232227",
                 borderColor: "rgba(0,123,252,0.2)",
+                cursor: "pointer",
               }}
+              onClick={() => openModal(featuredProject)}
             >
               <div className="flex h-full flex-col md:flex-row">
                 <div className="flex w-full flex-col justify-center p-8 md:w-[40%] md:p-10">
@@ -319,6 +437,7 @@ export default function Work() {
                       : undefined
                   }
                   className="group relative block h-[260px] w-full md:h-full md:w-[60%]"
+                  onClick={(e) => e.stopPropagation()}
                 >
                   <div
                     className="flex h-full w-full items-center justify-center transition-transform duration-300 group-hover:scale-[1.05]"
@@ -376,6 +495,7 @@ export default function Work() {
                   e.currentTarget.style.borderColor = "rgba(165,165,165,0.1)";
                   e.currentTarget.style.boxShadow = "none";
                 }}
+                onClick={() => openModal(project)}
               >
                 <div
                   style={{
@@ -605,6 +725,7 @@ export default function Work() {
                       rel={project.link.startsWith("http") ? "noopener noreferrer" : undefined}
                       aria-label={`Open ${project.name}`}
                       className="inline-flex items-center justify-center"
+                      onClick={(e) => e.stopPropagation()}
                     >
                       <ExternalLink
                         size={16}
@@ -647,6 +768,489 @@ export default function Work() {
           </a>
         </div>
       </section>
+
+      <AnimatePresence>
+        {selectedProject && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            style={{
+              position: "fixed",
+              inset: 0,
+              background: "rgba(0,0,0,0.95)",
+              zIndex: 1000,
+              overflowY: "auto",
+              backdropFilter: "blur(8px)",
+            }}
+            onClick={closeModal}
+          >
+            <div
+              onClick={(e) => e.stopPropagation()}
+              className="relative mx-auto max-w-[900px] px-4 pb-[60px] pt-5 md:px-6 md:pb-[80px] md:pt-10"
+            >
+              <button
+                onClick={closeModal}
+                style={{
+                  position: "fixed",
+                  top: "24px",
+                  right: "24px",
+                  background: "rgba(255,255,255,0.1)",
+                  border: "1px solid rgba(255,255,255,0.2)",
+                  borderRadius: "50%",
+                  width: "44px",
+                  height: "44px",
+                  color: "#FFFFFF",
+                  fontSize: "20px",
+                  cursor: "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  zIndex: 1001,
+                  backdropFilter: "blur(8px)",
+                }}
+              >
+                ✕
+              </button>
+
+              <div
+                className="relative mb-4 h-[300px] w-full overflow-hidden rounded-2xl md:h-[500px]"
+                style={{ background: getGradient(selectedProject.category) }}
+              >
+                {selectedProject.images[currentModalImage] && (
+                  <img
+                    src={selectedProject.images[currentModalImage]}
+                    alt={selectedProject.name}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      objectPosition: "top",
+                    }}
+                  />
+                )}
+
+                <div
+                  style={{
+                    position: "absolute",
+                    bottom: "16px",
+                    right: "16px",
+                    background: "rgba(0,0,0,0.7)",
+                    color: "#FFFFFF",
+                    padding: "4px 12px",
+                    borderRadius: "999px",
+                    fontSize: "13px",
+                    backdropFilter: "blur(8px)",
+                  }}
+                >
+                  {currentModalImage + 1} / {selectedProject.images.length}
+                </div>
+
+                {selectedProject.images.length > 1 && (
+                  <>
+                    <button
+                      onClick={() =>
+                        setCurrentModalImage(
+                          (prev) =>
+                            (prev - 1 + selectedProject.images.length) %
+                            selectedProject.images.length
+                        )
+                      }
+                      type="button"
+                      style={{
+                        position: "absolute",
+                        left: "16px",
+                        top: "50%",
+                        transform: "translateY(-50%)",
+                        background: "rgba(0,0,0,0.6)",
+                        border: "none",
+                        borderRadius: "50%",
+                        width: "44px",
+                        height: "44px",
+                        color: "#FFFFFF",
+                        fontSize: "22px",
+                        cursor: "pointer",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        backdropFilter: "blur(4px)",
+                      }}
+                    >
+                      ‹
+                    </button>
+
+                    <button
+                      onClick={() =>
+                        setCurrentModalImage(
+                          (prev) => (prev + 1) % selectedProject.images.length
+                        )
+                      }
+                      type="button"
+                      style={{
+                        position: "absolute",
+                        right: "16px",
+                        top: "50%",
+                        transform: "translateY(-50%)",
+                        background: "rgba(0,0,0,0.6)",
+                        border: "none",
+                        borderRadius: "50%",
+                        width: "44px",
+                        height: "44px",
+                        color: "#FFFFFF",
+                        fontSize: "22px",
+                        cursor: "pointer",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        backdropFilter: "blur(4px)",
+                      }}
+                    >
+                      ›
+                    </button>
+                  </>
+                )}
+              </div>
+
+              {selectedProject.images.length > 1 && (
+                <div style={{ display: "flex", gap: "8px", marginBottom: "32px", overflowX: "auto" }}>
+                  {selectedProject.images.map((img, idx) => (
+                    <div
+                      key={idx}
+                      onClick={() => setCurrentModalImage(idx)}
+                      style={{
+                        width: "80px",
+                        height: "56px",
+                        borderRadius: "8px",
+                        overflow: "hidden",
+                        cursor: "pointer",
+                        border: idx === currentModalImage ? "2px solid #007BFC" : "2px solid transparent",
+                        flexShrink: 0,
+                        background: getGradient(selectedProject.category),
+                        transition: "border 200ms",
+                      }}
+                    >
+                      <img
+                        src={img}
+                        alt=""
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          objectFit: "cover",
+                          objectPosition: "top",
+                        }}
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+                <div>
+                  <div style={{ display: "flex", gap: "8px", marginBottom: "12px" }}>
+                    <span
+                      style={{
+                        background: "rgba(0,123,252,0.1)",
+                        border: "1px solid rgba(0,123,252,0.3)",
+                        color: "#007BFC",
+                        padding: "4px 12px",
+                        borderRadius: "999px",
+                        fontSize: "12px",
+                        fontFamily: "General Sans, sans-serif",
+                      }}
+                    >
+                      {selectedProject.category}
+                    </span>
+                    <span
+                      style={{
+                        background: "rgba(255,255,255,0.05)",
+                        border: "1px solid rgba(255,255,255,0.1)",
+                        color: "#A5A5A5",
+                        padding: "4px 12px",
+                        borderRadius: "999px",
+                        fontSize: "12px",
+                        fontFamily: "General Sans, sans-serif",
+                      }}
+                    >
+                      {selectedProject.industry}
+                    </span>
+                  </div>
+
+                  <h2
+                    style={{
+                      fontFamily: "Satoshi, sans-serif",
+                      fontSize: "32px",
+                      fontWeight: 800,
+                      color: "#FFFFFF",
+                      marginBottom: "12px",
+                    }}
+                  >
+                    {selectedProject.name}
+                  </h2>
+
+                  <p
+                    style={{
+                      fontFamily: "Inter, sans-serif",
+                      fontSize: "15px",
+                      color: "#A5A5A5",
+                      lineHeight: 1.8,
+                      marginBottom: "24px",
+                    }}
+                  >
+                    {selectedProject.description}
+                  </p>
+
+                  {selectedProject.timeToComplete && (
+                    <div
+                      style={{
+                        background: "#232227",
+                        border: "1px solid rgba(165,165,165,0.1)",
+                        borderRadius: "12px",
+                        padding: "16px 20px",
+                        marginBottom: "16px",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "12px",
+                      }}
+                    >
+                      <span style={{ fontSize: "20px" }}>⚡</span>
+                      <div>
+                        <div
+                          style={{
+                            color: "#A5A5A5",
+                            fontSize: "12px",
+                            fontFamily: "General Sans",
+                            marginBottom: "2px",
+                          }}
+                        >
+                          TIME TO COMPLETE
+                        </div>
+                        <div
+                          style={{
+                            color: "#FFFFFF",
+                            fontSize: "18px",
+                            fontFamily: "Exo 2, sans-serif",
+                            fontWeight: 700,
+                          }}
+                        >
+                          {selectedProject.timeToComplete}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {selectedProject.services && (
+                    <div style={{ marginBottom: "24px" }}>
+                      <div
+                        style={{
+                          color: "#A5A5A5",
+                          fontSize: "12px",
+                          fontFamily: "General Sans",
+                          letterSpacing: "2px",
+                          marginBottom: "12px",
+                        }}
+                      >
+                        SERVICES PROVIDED
+                      </div>
+                      <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
+                        {selectedProject.services.map((service, idx) => (
+                          <span
+                            key={idx}
+                            style={{
+                              background: "#232227",
+                              border: "1px solid rgba(165,165,165,0.15)",
+                              color: "#FFFFFF",
+                              padding: "6px 14px",
+                              borderRadius: "8px",
+                              fontSize: "13px",
+                              fontFamily: "Inter, sans-serif",
+                            }}
+                          >
+                            ✓ {service}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                <div>
+                  <div style={{ marginBottom: "24px" }}>
+                    <div
+                      style={{
+                        color: "#A5A5A5",
+                        fontSize: "12px",
+                        fontFamily: "General Sans",
+                        letterSpacing: "2px",
+                        marginBottom: "12px",
+                      }}
+                    >
+                      TECH STACK
+                    </div>
+                    <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
+                      {selectedProject.tech.map((t, idx) => (
+                        <span
+                          key={idx}
+                          style={{
+                            background: "rgba(0,123,252,0.1)",
+                            border: "1px solid rgba(0,123,252,0.2)",
+                            color: "#007BFC",
+                            padding: "6px 14px",
+                            borderRadius: "8px",
+                            fontSize: "13px",
+                            fontFamily: "General Sans, sans-serif",
+                          }}
+                        >
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {selectedProject.clientReview && (
+                    <div
+                      style={{
+                        background: "#232227",
+                        border: "1px solid rgba(0,123,252,0.2)",
+                        borderRadius: "16px",
+                        padding: "24px",
+                        marginBottom: "24px",
+                      }}
+                    >
+                      <div style={{ color: "#FFB800", fontSize: "16px", marginBottom: "12px" }}>★★★★★</div>
+                      <p
+                        style={{
+                          fontFamily: "Inter, sans-serif",
+                          fontSize: "15px",
+                          color: "#A5A5A5",
+                          lineHeight: 1.8,
+                          fontStyle: "italic",
+                          marginBottom: "16px",
+                        }}
+                      >
+                        "{selectedProject.clientReview.text}"
+                      </p>
+                      <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                        <div
+                          style={{
+                            width: "40px",
+                            height: "40px",
+                            borderRadius: "50%",
+                            background: "#007BFC",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            color: "#FFFFFF",
+                            fontWeight: 700,
+                            fontSize: "14px",
+                          }}
+                        >
+                          {selectedProject.clientReview.name[0]}
+                        </div>
+                        <div>
+                          <div
+                            style={{
+                              color: "#FFFFFF",
+                              fontSize: "14px",
+                              fontWeight: 600,
+                              fontFamily: "Satoshi, sans-serif",
+                            }}
+                          >
+                            {selectedProject.clientReview.name}
+                          </div>
+                          <div
+                            style={{
+                              color: "#A5A5A5",
+                              fontSize: "13px",
+                              fontFamily: "Inter, sans-serif",
+                            }}
+                          >
+                            {selectedProject.clientReview.role}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {selectedProject.link !== "#" && (
+                    <a
+                      href={selectedProject.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        gap: "8px",
+                        background: "#007BFC",
+                        color: "#FFFFFF",
+                        padding: "14px 24px",
+                        borderRadius: "8px",
+                        fontFamily: "General Sans, sans-serif",
+                        fontSize: "15px",
+                        fontWeight: 500,
+                        textDecoration: "none",
+                        width: "100%",
+                        transition: "opacity 200ms",
+                      }}
+                    >
+                      View Live Website →
+                    </a>
+                  )}
+                </div>
+              </div>
+
+              <div
+                style={{
+                  marginTop: "48px",
+                  padding: "32px",
+                  background: "#232227",
+                  borderRadius: "16px",
+                  border: "1px solid rgba(0,123,252,0.2)",
+                  textAlign: "center",
+                }}
+              >
+                <h3
+                  style={{
+                    fontFamily: "Satoshi, sans-serif",
+                    fontSize: "24px",
+                    fontWeight: 800,
+                    color: "#FFFFFF",
+                    marginBottom: "8px",
+                  }}
+                >
+                  Want something like this? 🚀
+                </h3>
+                <p
+                  style={{
+                    color: "#A5A5A5",
+                    fontFamily: "Inter, sans-serif",
+                    fontSize: "15px",
+                    marginBottom: "20px",
+                  }}
+                >
+                  Book a free consultation and let's build your project!
+                </p>
+                <a
+                  href="/#contact"
+                  onClick={closeModal}
+                  style={{
+                    background: "#007BFC",
+                    color: "#FFFFFF",
+                    padding: "12px 32px",
+                    borderRadius: "8px",
+                    fontFamily: "General Sans, sans-serif",
+                    fontSize: "15px",
+                    textDecoration: "none",
+                    display: "inline-block",
+                  }}
+                >
+                  Book a Free Call →
+                </a>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </main>
   );
 }
