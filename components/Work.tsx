@@ -60,14 +60,14 @@ const projects: Project[] = [
     id: 2,
     name: "LettrBlack Website",
     description:
-      "High-converting landing page for an early-stage startup with lead capture and animations.",
+      "We transformed a simple idea into a live, high-converting EdTech landing page in just 6 days — focused on clarity, user experience, and lead generation.",
     industry: "Basic Website",
     category: "Landing Page",
     images: ["/images/work/lettrblack-1.png", "/images/work/lettrblack-2.png", "/images/work/lettrblack-3.png"],
     tech: ["Next.js", "Framer Motion"],
     link: "#",
     featured: false,
-    timeToComplete: "1 Week",
+    timeToComplete: "5 Days",
     services: [
       "Landing Page Design",
       "Frontend Development",
@@ -76,7 +76,7 @@ const projects: Project[] = [
     ],
     clientReview: {
       text: "The landing page they built for us was exactly what we needed. Clean, fast and converts really well!",
-      name: "Client Name",
+      name: "Vivek Nairy",
       role: "Founder, LettrBlack",
     },
   },
