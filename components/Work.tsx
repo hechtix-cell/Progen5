@@ -132,59 +132,6 @@ const projects: Project[] = [
       role: "Head of Operations, RNYB",
     },
   },
-  {
-    id: 5,
-    name: "Brand Identity",
-    description:
-      "Complete brand identity for a fintech startup including logo, colors and typography.",
-    industry: "Fintech",
-    category: "Branding",
-    images: ["/images/work/project5-1.png", "/images/work/project5-2.png"],
-    tech: ["Figma", "Illustrator"],
-    link: "#",
-    featured: false,
-    timeToComplete: "10 Days",
-    services: [
-      "Brand Discovery",
-      "Logo System",
-      "Color & Typography",
-      "Brand Guidelines",
-    ],
-    clientReview: {
-      text: "Our new brand identity finally feels like us. Clean, modern, and memorable.",
-      name: "Karan Batra",
-      role: "Founder, Finora",
-    },
-  },
-  {
-    id: 6,
-    name: "EdTech Platform",
-    description:
-      "Online learning platform MVP with course management, video hosting and student portal.",
-    industry: "EdTech",
-    category: "MVP",
-    images: [
-      "/images/work/project6-1.png",
-      "/images/work/project6-2.png",
-      "/images/work/project6-3.png",
-    ],
-    tech: ["React", "Firebase", "Stripe"],
-    link: "#",
-    featured: false,
-    timeToComplete: "5 Weeks",
-    services: [
-      "MVP Planning",
-      "Learning Experience Design",
-      "Course Platform Development",
-      "Payments Setup",
-      "Deployment",
-    ],
-    clientReview: {
-      text: "They understood the EdTech space well and delivered a stable platform our students love.",
-      name: "Sneha Rao",
-      role: "Founder, SkillNest",
-    },
-  },
 ];
 
 const placeholderGradientByCategory: Record<ProjectCategory, string> = {
