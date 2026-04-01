@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ExternalLink } from "lucide-react";
+import type React from "react";
 import { useMemo, useState } from "react";
 
 type ProjectCategory = "Website" | "MVP" | "Landing Page" | "Branding";
@@ -12,7 +13,7 @@ type Project = {
   description: string;
   industry: string;
   category: ProjectCategory;
-  image: string;
+  images: string[];
   tech: string[];
   link: string;
   featured: boolean;
@@ -26,7 +27,11 @@ const projects: Project[] = [
       "Our own agency website built with Next.js, featuring dark theme, animations and AI chatbot.",
     industry: "Agency",
     category: "Website",
-    image: "/images/work/progen5.png",
+    images: [
+      "/images/work/progen5-1.png",
+      "/images/work/progen5-2.png",
+      "/images/work/progen5-3.png",
+    ],
     tech: ["Next.js", "Tailwind", "n8n"],
     link: "https://progen5.vercel.app",
     featured: true,
@@ -38,7 +43,7 @@ const projects: Project[] = [
       "High-converting landing page for an early-stage startup with lead capture and animations.",
     industry: "SaaS",
     category: "Landing Page",
-    image: "/images/work/project2.png",
+    images: ["/images/work/project2-1.png", "/images/work/project2-2.png"],
     tech: ["Next.js", "Framer Motion"],
     link: "#",
     featured: false,
@@ -50,7 +55,11 @@ const projects: Project[] = [
       "Full MVP for an e-commerce startup with product listings and payment integration.",
     industry: "E-Commerce",
     category: "MVP",
-    image: "/images/work/project3.png",
+    images: [
+      "/images/work/project3-1.png",
+      "/images/work/project3-2.png",
+      "/images/work/project3-3.png",
+    ],
     tech: ["React", "Node.js", "MongoDB"],
     link: "#",
     featured: false,
@@ -62,7 +71,7 @@ const projects: Project[] = [
       "Clean and modern SaaS dashboard with analytics, user management and billing features.",
     industry: "SaaS",
     category: "MVP",
-    image: "/images/work/project4.png",
+    images: ["/images/work/project4-1.png", "/images/work/project4-2.png"],
     tech: ["Next.js", "Firebase"],
     link: "#",
     featured: false,
@@ -74,7 +83,7 @@ const projects: Project[] = [
       "Complete brand identity for a fintech startup including logo, colors and typography.",
     industry: "Fintech",
     category: "Branding",
-    image: "/images/work/project5.png",
+    images: ["/images/work/project5-1.png", "/images/work/project5-2.png"],
     tech: ["Figma", "Illustrator"],
     link: "#",
     featured: false,
@@ -86,7 +95,11 @@ const projects: Project[] = [
       "Online learning platform MVP with course management, video hosting and student portal.",
     industry: "EdTech",
     category: "MVP",
-    image: "/images/work/project6.png",
+    images: [
+      "/images/work/project6-1.png",
+      "/images/work/project6-2.png",
+      "/images/work/project6-3.png",
+    ],
     tech: ["React", "Firebase", "Stripe"],
     link: "#",
     featured: false,
@@ -103,6 +116,8 @@ const placeholderGradientByCategory: Record<ProjectCategory, string> = {
   Branding: "linear-gradient(135deg, #FF6B6B, #FF8E53)",
 };
 
+const getGradient = (category: ProjectCategory) => placeholderGradientByCategory[category];
+
 function initialsFromName(name: string) {
   return name
     .split(" ")
@@ -114,6 +129,25 @@ function initialsFromName(name: string) {
 
 export default function Work() {
   const [activeFilter, setActiveFilter] = useState<FilterKey>("All");
+  const [currentImage, setCurrentImage] = useState<{ [key: number]: number }>({});
+
+  const getImageIndex = (projectId: number) => currentImage[projectId] || 0;
+
+  const nextImage = (e: React.MouseEvent, projectId: number, totalImages: number) => {
+    e.stopPropagation();
+    setCurrentImage((prev) => ({
+      ...prev,
+      [projectId]: ((prev[projectId] || 0) + 1) % totalImages,
+    }));
+  };
+
+  const prevImage = (e: React.MouseEvent, projectId: number, totalImages: number) => {
+    e.stopPropagation();
+    setCurrentImage((prev) => ({
+      ...prev,
+      [projectId]: ((prev[projectId] || 0) - 1 + totalImages) % totalImages,
+    }));
+  };
 
   const featuredProject = projects.find((project) => project.featured) ?? projects[0];
 
@@ -344,32 +378,181 @@ export default function Work() {
                   e.currentTarget.style.boxShadow = "none";
                 }}
               >
-                <div className="relative h-[220px] overflow-hidden" style={{ background: "#1a1a2e" }}>
-                  <div
-                    className="flex h-full w-full items-center justify-center transition-transform duration-300 group-hover:scale-[1.05]"
-                    style={{
-                      background: placeholderGradientByCategory[project.category],
-                    }}
-                  >
-                    <span
-                      className="text-[52px] font-extrabold text-white/95"
-                      style={{ fontFamily: "Satoshi, sans-serif" }}
+                <div
+                  style={{
+                    position: "relative",
+                    height: "220px",
+                    overflow: "hidden",
+                    borderRadius: "16px 16px 0 0",
+                  }}
+                >
+                  {/* Current Image or Placeholder */}
+                  {project.images[getImageIndex(project.id)] ? (
+                    <img
+                      src={project.images[getImageIndex(project.id)]}
+                      alt={project.name}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                        transition: "transform 300ms ease",
+                      }}
+                    />
+                  ) : (
+                    // Gradient placeholder
+                    <div
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        background: getGradient(project.category),
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
                     >
-                      {initialsFromName(project.name)}
-                    </span>
-                  </div>
+                      <span
+                        style={{
+                          fontSize: "48px",
+                          fontWeight: 800,
+                          color: "rgba(255,255,255,0.8)",
+                          fontFamily: "Satoshi, sans-serif",
+                        }}
+                      >
+                        {project.name
+                          .split(" ")
+                          .map((w: string) => w[0])
+                          .join("")
+                          .slice(0, 2)}
+                      </span>
+                    </div>
+                  )}
 
-                  <span
-                    className="absolute left-3 top-3 rounded-full border px-3 py-[4px] text-[11px] text-white"
+                  {/* Navigation arrows - only show if more than 1 image */}
+                  {project.images.length > 1 && (
+                    <>
+                      {/* Left arrow */}
+                      <button
+                        onClick={(e) => prevImage(e, project.id, project.images.length)}
+                        style={{
+                          position: "absolute",
+                          left: "8px",
+                          top: "50%",
+                          transform: "translateY(-50%)",
+                          background: "rgba(0,0,0,0.6)",
+                          border: "none",
+                          borderRadius: "50%",
+                          width: "32px",
+                          height: "32px",
+                          cursor: "pointer",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: "#FFFFFF",
+                          fontSize: "16px",
+                          zIndex: 2,
+                          backdropFilter: "blur(4px)",
+                        }}
+                      >
+                        ‹
+                      </button>
+
+                      {/* Right arrow */}
+                      <button
+                        onClick={(e) => nextImage(e, project.id, project.images.length)}
+                        style={{
+                          position: "absolute",
+                          right: "8px",
+                          top: "50%",
+                          transform: "translateY(-50%)",
+                          background: "rgba(0,0,0,0.6)",
+                          border: "none",
+                          borderRadius: "50%",
+                          width: "32px",
+                          height: "32px",
+                          cursor: "pointer",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: "#FFFFFF",
+                          fontSize: "16px",
+                          zIndex: 2,
+                          backdropFilter: "blur(4px)",
+                        }}
+                      >
+                        ›
+                      </button>
+
+                      {/* Dot indicators */}
+                      <div
+                        style={{
+                          position: "absolute",
+                          bottom: "8px",
+                          left: "50%",
+                          transform: "translateX(-50%)",
+                          display: "flex",
+                          gap: "6px",
+                          zIndex: 2,
+                        }}
+                      >
+                        {project.images.map((_: string, idx: number) => (
+                          <div
+                            key={idx}
+                            style={{
+                              width: idx === getImageIndex(project.id) ? "20px" : "6px",
+                              height: "6px",
+                              borderRadius: "999px",
+                              background:
+                                idx === getImageIndex(project.id)
+                                  ? "#007BFC"
+                                  : "rgba(255,255,255,0.5)",
+                              transition: "all 300ms ease",
+                            }}
+                          />
+                        ))}
+                      </div>
+                    </>
+                  )}
+
+                  {/* Category badge */}
+                  <div
                     style={{
-                      fontFamily: "General Sans, sans-serif",
+                      position: "absolute",
+                      top: "12px",
+                      left: "12px",
                       background: "rgba(0,0,0,0.7)",
                       backdropFilter: "blur(8px)",
-                      borderColor: "rgba(255,255,255,0.1)",
+                      border: "1px solid rgba(255,255,255,0.1)",
+                      color: "#FFFFFF",
+                      fontSize: "11px",
+                      padding: "4px 12px",
+                      borderRadius: "999px",
+                      fontFamily: "General Sans, sans-serif",
+                      zIndex: 2,
                     }}
                   >
                     {project.category}
-                  </span>
+                  </div>
+
+                  {/* Image counter */}
+                  {project.images.length > 1 && (
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: "12px",
+                        right: "12px",
+                        background: "rgba(0,0,0,0.7)",
+                        backdropFilter: "blur(8px)",
+                        color: "#FFFFFF",
+                        fontSize: "11px",
+                        padding: "4px 10px",
+                        borderRadius: "999px",
+                        fontFamily: "General Sans, sans-serif",
+                        zIndex: 2,
+                      }}
+                    >
+                      {getImageIndex(project.id) + 1}/{project.images.length}
+                    </div>
+                  )}
                 </div>
 
                 <div className="p-6">
