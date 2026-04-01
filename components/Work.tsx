@@ -38,12 +38,12 @@ const projects: Project[] = [
   },
   {
     id: 2,
-    name: "Startup Landing Page",
+    name: "LettrBlack Website",
     description:
       "High-converting landing page for an early-stage startup with lead capture and animations.",
-    industry: "SaaS",
+    industry: "Basic Website",
     category: "Landing Page",
-    images: ["/images/work/project2-1.png", "/images/work/project2-2.png"],
+    images: ["/images/work/lettrblack-1.png", "/images/work/lettrblack-2.png", "/images/work/lettrblack-3.png"],
     tech: ["Next.js", "Framer Motion"],
     link: "#",
     featured: false,
