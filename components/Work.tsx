@@ -134,6 +134,7 @@ export default function Work() {
   const getImageIndex = (projectId: number) => currentImage[projectId] || 0;
 
   const nextImage = (e: React.MouseEvent, projectId: number, totalImages: number) => {
+    e.preventDefault();
     e.stopPropagation();
     setCurrentImage((prev) => ({
       ...prev,
@@ -142,6 +143,7 @@ export default function Work() {
   };
 
   const prevImage = (e: React.MouseEvent, projectId: number, totalImages: number) => {
+    e.preventDefault();
     e.stopPropagation();
     setCurrentImage((prev) => ({
       ...prev,
@@ -351,11 +353,8 @@ export default function Work() {
             className="grid grid-cols-1 gap-7 md:grid-cols-2 xl:grid-cols-3"
           >
             {filteredProjects.map((project) => (
-              <motion.a
+              <motion.div
                 key={project.id}
-                href={project.link}
-                target={project.link.startsWith("http") ? "_blank" : undefined}
-                rel={project.link.startsWith("http") ? "noopener noreferrer" : undefined}
                 variants={{
                   hidden: { opacity: 0, y: 30 },
                   show: { opacity: 1, y: 0 },
@@ -384,54 +383,62 @@ export default function Work() {
                     height: "220px",
                     overflow: "hidden",
                     borderRadius: "16px 16px 0 0",
+                    background: getGradient(project.category),
                   }}
                 >
-                  {/* Current Image or Placeholder */}
-                  {project.images[getImageIndex(project.id)] ? (
-                    <img
-                      src={project.images[getImageIndex(project.id)]}
-                      alt={project.name}
+                  {/* Fallback initials shown under image */}
+                  <div
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      zIndex: 0,
+                    }}
+                  >
+                    <span
                       style={{
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "cover",
-                        transition: "transform 300ms ease",
-                      }}
-                    />
-                  ) : (
-                    // Gradient placeholder
-                    <div
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        background: getGradient(project.category),
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
+                        fontSize: "48px",
+                        fontWeight: 800,
+                        color: "rgba(255,255,255,0.8)",
+                        fontFamily: "Satoshi, sans-serif",
                       }}
                     >
-                      <span
-                        style={{
-                          fontSize: "48px",
-                          fontWeight: 800,
-                          color: "rgba(255,255,255,0.8)",
-                          fontFamily: "Satoshi, sans-serif",
-                        }}
-                      >
-                        {project.name
-                          .split(" ")
-                          .map((w: string) => w[0])
-                          .join("")
-                          .slice(0, 2)}
-                      </span>
-                    </div>
-                  )}
+                      {project.name
+                        .split(" ")
+                        .map((w: string) => w[0])
+                        .join("")
+                        .slice(0, 2)}
+                    </span>
+                  </div>
+
+                  {/* Image on top of fallback */}
+                  <img
+                    src={project.images[getImageIndex(project.id)]}
+                    alt={project.name}
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      objectPosition: "top",
+                      transition: "transform 300ms ease",
+                      display: "block",
+                      zIndex: 1,
+                    }}
+                    onError={(e) => {
+                      e.currentTarget.style.display = "none";
+                    }}
+                  />
 
                   {/* Navigation arrows - only show if more than 1 image */}
                   {project.images.length > 1 && (
                     <>
                       {/* Left arrow */}
                       <button
+                        type="button"
                         onClick={(e) => prevImage(e, project.id, project.images.length)}
                         style={{
                           position: "absolute",
@@ -458,6 +465,7 @@ export default function Work() {
 
                       {/* Right arrow */}
                       <button
+                        type="button"
                         onClick={(e) => nextImage(e, project.id, project.images.length)}
                         style={{
                           position: "absolute",
@@ -591,14 +599,22 @@ export default function Work() {
                         </span>
                       ))}
                     </div>
-                    <ExternalLink
-                      size={16}
-                      color="#A5A5A5"
-                      className="transition-colors duration-200 group-hover:text-[#007BFC]"
-                    />
+                    <a
+                      href={project.link}
+                      target={project.link.startsWith("http") ? "_blank" : undefined}
+                      rel={project.link.startsWith("http") ? "noopener noreferrer" : undefined}
+                      aria-label={`Open ${project.name}`}
+                      className="inline-flex items-center justify-center"
+                    >
+                      <ExternalLink
+                        size={16}
+                        color="#A5A5A5"
+                        className="transition-colors duration-200 group-hover:text-[#007BFC]"
+                      />
+                    </a>
                   </div>
                 </div>
-              </motion.a>
+              </motion.div>
             ))}
           </motion.div>
         </div>
