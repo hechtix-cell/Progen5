@@ -94,7 +94,7 @@ const projects: Project[] = [
     tech: ["React", "Node.js", "MongoDB"],
     link: "#",
     featured: false,
-    timeToComplete: "4 Weeks",
+    timeToComplete: "7 Days",
     services: [
       "Product Strategy",
       "UI/UX Design",
@@ -110,16 +110,16 @@ const projects: Project[] = [
   },
   {
     id: 4,
-    name: "SaaS Dashboard",
+    name: "RNYB NGO Website",
     description:
-      "Clean and modern SaaS dashboard with analytics, user management and billing features.",
-    industry: "SaaS",
+      "A clean and impactful website built for a non-profit organization to showcase their mission, initiatives, and real-world impact. Designed to build trust, increase awareness, and make it easier for people to support through donations and engagement.",
+    industry: "Basic Website",
     category: "MVP",
-    images: ["/images/work/project4-1.png", "/images/work/project4-2.png"],
+    images: ["/images/work/rnyb-1.png", "/images/work/rnyb-2.png", "/images/work/rnyb-3.png"],
     tech: ["Next.js", "Firebase"],
     link: "#",
     featured: false,
-    timeToComplete: "3 Weeks",
+    timeToComplete: "3 Days",
     services: [
       "Dashboard Design",
       "Data Visualization",
@@ -127,9 +127,9 @@ const projects: Project[] = [
       "Auth & Permissions",
     ],
     clientReview: {
-      text: "The dashboard looks premium and is super easy for our team to use daily.",
-      name: "Riya Mehta",
-      role: "Product Lead, TaskPilot",
+      text: "Professional, fast, and reliable. Progen5 delivered a website that truly reflects our mission and helps us reach more people..",
+      name: "Madhukar",
+      role: "Head of Operations, RNYB",
     },
   },
   {
