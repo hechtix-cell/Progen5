@@ -1127,7 +1127,7 @@ export default function Work() {
                           marginBottom: "16px",
                         }}
                       >
-                        "{selectedProject.clientReview.text}"
+                        &quot;{selectedProject.clientReview.text}&quot;
                       </p>
                       <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
                         <div
@@ -1228,7 +1228,7 @@ export default function Work() {
                     marginBottom: "20px",
                   }}
                 >
-                  Book a free consultation and let's build your project!
+                  Book a free consultation and let&apos;s build your project!
                 </p>
                 <a
                   href="/#contact"
