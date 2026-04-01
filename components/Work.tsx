@@ -31,7 +31,7 @@ const projects: Project[] = [
     id: 1,
     name: "Progen5 Website",
     description:
-      "Our own agency website built with Next.js, featuring dark theme, animations and AI chatbot.",
+      "Progen5 is a startup execution agency that helps founders turn ideas into real, launched products. From design and development to branding and deployment, we handle everything — so you can focus on growth.",
     industry: "Agency",
     category: "Website",
     images: [
@@ -42,7 +42,7 @@ const projects: Project[] = [
     tech: ["Next.js", "Tailwind", "n8n"],
     link: "https://progen5.vercel.app",
     featured: true,
-    timeToComplete: "2 Weeks",
+    timeToComplete: "7 Days",
     services: [
       "UI/UX Design",
       "Frontend Development",
