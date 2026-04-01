@@ -458,7 +458,9 @@ export default function Work() {
             }}
             className="grid grid-cols-1 gap-7 md:grid-cols-2 xl:grid-cols-3"
           >
-            {projects.map((project) => (
+            {projects
+              .filter((project) => !project.featured)
+              .map((project) => (
               <motion.div
                 key={project.id}
                 variants={{
