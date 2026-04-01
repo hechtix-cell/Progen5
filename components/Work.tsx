@@ -200,15 +200,6 @@ const placeholderGradientByCategory: Record<ProjectCategory, string> = {
 
 const getGradient = (category: ProjectCategory) => placeholderGradientByCategory[category];
 
-function initialsFromName(name: string) {
-  return name
-    .split(" ")
-    .filter(Boolean)
-    .slice(0, 2)
-    .map((word) => word[0]?.toUpperCase())
-    .join("");
-}
-
 export default function Work() {
   const [activeFilter, setActiveFilter] = useState<FilterKey>("All");
   const [currentImage, setCurrentImage] = useState<{ [key: number]: number }>({});
@@ -440,17 +431,60 @@ export default function Work() {
                   onClick={(e) => e.stopPropagation()}
                 >
                   <div
-                    className="flex h-full w-full items-center justify-center transition-transform duration-300 group-hover:scale-[1.05]"
                     style={{
-                      background: placeholderGradientByCategory[featuredProject.category],
+                      position: "relative",
+                      width: "100%",
+                      height: "100%",
+                      background: getGradient(featuredProject.category),
+                      overflow: "hidden",
                     }}
                   >
-                    <span
-                      className="text-[68px] font-extrabold text-white/95"
-                      style={{ fontFamily: "Satoshi, sans-serif" }}
+                    {/* Fallback initials */}
+                    <div
+                      style={{
+                        position: "absolute",
+                        inset: 0,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        zIndex: 0,
+                      }}
                     >
-                      {initialsFromName(featuredProject.name)}
-                    </span>
+                      <span
+                        style={{
+                          fontSize: "72px",
+                          fontWeight: 800,
+                          color: "rgba(255,255,255,0.3)",
+                          fontFamily: "Satoshi, sans-serif",
+                        }}
+                      >
+                        {featuredProject.name
+                          .split(" ")
+                          .map((w: string) => w[0])
+                          .join("")
+                          .slice(0, 2)}
+                      </span>
+                    </div>
+
+                    {/* Actual screenshot on top */}
+                    {featuredProject.images && featuredProject.images[0] && (
+                      <img
+                        src={featuredProject.images[0]}
+                        alt={featuredProject.name}
+                        style={{
+                          position: "absolute",
+                          inset: 0,
+                          width: "100%",
+                          height: "100%",
+                          objectFit: "cover",
+                          objectPosition: "top",
+                          zIndex: 1,
+                        }}
+                        onError={(e) => {
+                          e.currentTarget.style.display = "none";
+                        }}
+                      />
+                    )}
                   </div>
                 </a>
               </div>
