@@ -7,7 +7,7 @@ export default function WhatsAppButton() {
   const [hovered, setHovered] = useState(false);
 
   const handleClick = () => {
-    const number = "919611702503";
+    const number = "916362131572";
     const message = encodeURIComponent(
       "Hi Progen5! I'm interested in your services. Can we connect?",
     );
