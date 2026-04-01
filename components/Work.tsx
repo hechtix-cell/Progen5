@@ -3,7 +3,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { ExternalLink } from "lucide-react";
 import type React from "react";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 
 type ProjectCategory = "Website" | "MVP" | "Landing Page" | "Branding";
 
@@ -188,9 +188,6 @@ const projects: Project[] = [
   },
 ];
 
-const FILTERS = ["All", "Website", "MVP", "Landing Page", "Branding"] as const;
-type FilterKey = (typeof FILTERS)[number];
-
 const placeholderGradientByCategory: Record<ProjectCategory, string> = {
   Website: "linear-gradient(135deg, #007BFC, #0055b3)",
   MVP: "linear-gradient(135deg, #6400FF, #007BFC)",
@@ -201,7 +198,6 @@ const placeholderGradientByCategory: Record<ProjectCategory, string> = {
 const getGradient = (category: ProjectCategory) => placeholderGradientByCategory[category];
 
 export default function Work() {
-  const [activeFilter, setActiveFilter] = useState<FilterKey>("All");
   const [currentImage, setCurrentImage] = useState<{ [key: number]: number }>({});
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [currentModalImage, setCurrentModalImage] = useState(0);
@@ -260,12 +256,6 @@ export default function Work() {
 
   const featuredProject = projects.find((project) => project.featured) ?? projects[0];
 
-  const filteredProjects = useMemo(() => {
-    const nonFeaturedProjects = projects.filter((project) => !project.featured);
-    if (activeFilter === "All") return nonFeaturedProjects;
-    return nonFeaturedProjects.filter((project) => project.category === activeFilter);
-  }, [activeFilter]);
-
   return (
     <main className="bg-black pt-[70px]">
       <motion.section
@@ -319,46 +309,9 @@ export default function Work() {
         </div>
       </motion.section>
 
-      <motion.section
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-        className="px-6 md:px-[80px]"
-      >
-        <div className="mx-auto flex max-w-[1200px] flex-wrap justify-center gap-3">
-          {FILTERS.map((filter) => {
-            const isActive = activeFilter === filter;
-            return (
-              <button
-                key={filter}
-                type="button"
-                onClick={() => setActiveFilter(filter)}
-                className="rounded-full px-5 py-2 text-[14px] transition-all duration-200"
-                style={{
-                  fontFamily: "General Sans, sans-serif",
-                  background: isActive ? "#007BFC" : "transparent",
-                  color: isActive ? "#FFFFFF" : "#A5A5A5",
-                  border: isActive
-                    ? "1px solid transparent"
-                    : "1px solid rgba(165,165,165,0.2)",
-                }}
-                onMouseEnter={(e) => {
-                  if (!isActive) e.currentTarget.style.borderColor = "#007BFC";
-                }}
-                onMouseLeave={(e) => {
-                  if (!isActive) e.currentTarget.style.borderColor = "rgba(165,165,165,0.2)";
-                }}
-              >
-                {filter}
-              </button>
-            );
-          })}
-        </div>
-      </motion.section>
-
       <section className="px-6 pb-[40px] pt-[40px] md:px-[80px] md:pt-[60px]">
         <div className="mx-auto max-w-[1200px]">
-          {(activeFilter === "All" || activeFilter === featuredProject.category) && (
+          {
             <motion.article
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -489,7 +442,7 @@ export default function Work() {
                 </a>
               </div>
             </motion.article>
-          )}
+          }
 
           <motion.div
             initial="hidden"
@@ -505,7 +458,7 @@ export default function Work() {
             }}
             className="grid grid-cols-1 gap-7 md:grid-cols-2 xl:grid-cols-3"
           >
-            {filteredProjects.map((project) => (
+            {projects.map((project) => (
               <motion.div
                 key={project.id}
                 variants={{
