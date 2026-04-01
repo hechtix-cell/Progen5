@@ -233,6 +233,20 @@ export default function Work() {
     document.body.style.overflow = "auto";
   };
 
+  const handleMixedImageFit = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    const img = e.currentTarget;
+    const isPortrait = img.naturalHeight > img.naturalWidth;
+    if (isPortrait) {
+      img.style.objectFit = "contain";
+      img.style.objectPosition = "center";
+      img.style.background = "#1a1a2e";
+      return;
+    }
+    img.style.objectFit = "cover";
+    img.style.objectPosition = "center";
+    img.style.background = "transparent";
+  };
+
   useEffect(() => {
     if (!selectedProject) return;
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -387,7 +401,7 @@ export default function Work() {
                       position: "relative",
                       width: "100%",
                       height: "100%",
-                      background: getGradient(featuredProject.category),
+                      background: "#1a1a2e",
                       overflow: "hidden",
                     }}
                   >
@@ -429,9 +443,11 @@ export default function Work() {
                           width: "100%",
                           height: "100%",
                           objectFit: "cover",
-                          objectPosition: "top",
+                          objectPosition: "center",
+                          background: "#1a1a2e",
                           zIndex: 1,
                         }}
+                        onLoad={handleMixedImageFit}
                         onError={(e) => {
                           e.currentTarget.style.display = "none";
                         }}
@@ -491,7 +507,7 @@ export default function Work() {
                     height: "220px",
                     overflow: "hidden",
                     borderRadius: "16px 16px 0 0",
-                    background: getGradient(project.category),
+                    background: "#1a1a2e",
                   }}
                 >
                   {/* Fallback initials shown under image */}
@@ -531,11 +547,13 @@ export default function Work() {
                       width: "100%",
                       height: "100%",
                       objectFit: "cover",
-                      objectPosition: "top",
+                      objectPosition: "center",
+                      background: "#1a1a2e",
                       transition: "transform 300ms ease",
                       display: "block",
                       zIndex: 1,
                     }}
+                    onLoad={handleMixedImageFit}
                     onError={(e) => {
                       e.currentTarget.style.display = "none";
                     }}
@@ -803,7 +821,7 @@ export default function Work() {
 
               <div
                 className="relative mb-4 h-[300px] w-full overflow-hidden rounded-2xl md:h-[500px]"
-                style={{ background: getGradient(selectedProject.category) }}
+                style={{ background: "#1a1a2e" }}
               >
                 {selectedProject.images[currentModalImage] && (
                   <img
@@ -813,8 +831,10 @@ export default function Work() {
                       width: "100%",
                       height: "100%",
                       objectFit: "cover",
-                      objectPosition: "top",
+                      objectPosition: "center",
+                      background: "#1a1a2e",
                     }}
+                    onLoad={handleMixedImageFit}
                   />
                 )}
 
@@ -924,8 +944,10 @@ export default function Work() {
                           width: "100%",
                           height: "100%",
                           objectFit: "cover",
-                          objectPosition: "top",
+                          objectPosition: "center",
+                          background: "#1a1a2e",
                         }}
+                        onLoad={handleMixedImageFit}
                       />
                     </div>
                   ))}
