@@ -82,15 +82,14 @@ const projects: Project[] = [
   },
   {
     id: 3,
-    name: "E-Commerce MVP",
+    name: "CropDoc Application",
     description:
-      "Full MVP for an e-commerce startup with product listings and payment integration.",
-    industry: "E-Commerce",
+      "An AI-powered agriculture solution that detects crop diseases in real-time through image scanning. Built to help farmers identify issues early, reduce crop loss, and take faster action using smart, data-driven insights.",
+    industry: "Agriculture",
     category: "MVP",
     images: [
-      "/images/work/project3-1.png",
-      "/images/work/project3-2.png",
-      "/images/work/project3-3.png",
+      "/images/work/cropdoc-1.png",
+      "/images/work/cropdoc-2.png",
     ],
     tech: ["React", "Node.js", "MongoDB"],
     link: "#",
@@ -100,13 +99,13 @@ const projects: Project[] = [
       "Product Strategy",
       "UI/UX Design",
       "Frontend + Backend Development",
-      "Payment Integration",
+      "AI Integration",
       "QA & Launch",
     ],
     clientReview: {
       text: "They shipped our MVP fast without compromising quality. The team handled everything end-to-end.",
-      name: "Ankit Sharma",
-      role: "Founder, CommerceFlow",
+      name: "Sudeep S R",
+      role: "Founder, CropDoc",
     },
   },
   {
