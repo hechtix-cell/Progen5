@@ -1,6 +1,7 @@
 "use client";
 
-import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, Moon, Sun, X } from "lucide-react";
@@ -8,19 +9,27 @@ import clsx from "clsx";
 import { useTheme } from "next-themes";
 
 const NAV_LINKS = [
-  { label: "Services", href: "#services" },
+  { label: "Services", section: "services" },
   { label: "Work", href: "/work" },
-  { label: "Pricing", href: "#pricing" },
-  { label: "FAQ", href: "#faq" },
-  { label: "About", href: "#about" },
-  { label: "Contact", href: "#contact" },
+  { label: "Pricing", section: "pricing" },
+  { label: "FAQ", section: "faq" },
+  { label: "About", section: "about" },
+  { label: "Contact", section: "contact" },
 ] as const;
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+
+  const getNavHref = (section: string) => {
+    if (pathname === "/") {
+      return `#${section}`;
+    }
+    return `/#${section}`;
+  };
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 50);
@@ -44,30 +53,27 @@ export default function Navbar() {
     >
       <div className="mx-auto flex h-full w-full items-center justify-between px-6 md:px-[80px]">
         {/* LEFT */}
-        <a href="#hero" className="flex items-center">
-          <div style={{ display: "flex", alignItems: "center", padding: "0px" }}>
-            <Image
-              src="/images/logo.svg?v=3"
-              alt="Progen5"
-              width={140}
-              height={55}
-              unoptimized
-              priority
-              style={{ width: "auto", height: "130px" }}
-            />
-          </div>
-        </a>
+        <Link href="/" className="flex items-center">
+          <img
+            src="/images/logo.svg"
+            alt="Progen5"
+            style={{
+              height: "55px",
+              width: "auto",
+            }}
+          />
+        </Link>
 
         {/* CENTER */}
         <nav className="hidden md:flex items-center gap-10 font-ui text-[15px] text-[var(--text-secondary)]">
           {NAV_LINKS.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
+            <Link
+              key={link.label}
+              href={"href" in link ? link.href : getNavHref(link.section)}
               className="transition-colors duration-200 hover:text-[var(--text-primary)]"
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
@@ -99,8 +105,8 @@ export default function Navbar() {
 
         {/* RIGHT */}
         <div className="flex items-center gap-3">
-          <a
-            href="#contact"
+          <Link
+            href={getNavHref("contact")}
             className={clsx(
               "hidden md:inline-flex",
               "rounded-btn bg-blue px-5 py-[10px]",
@@ -109,7 +115,7 @@ export default function Navbar() {
             )}
           >
             Book a Free Call
-          </a>
+          </Link>
 
           <button
             type="button"
@@ -143,18 +149,18 @@ export default function Navbar() {
 
               <nav className="flex h-full flex-col items-center justify-center gap-8 font-ui text-[15px] text-[var(--text-secondary)]">
                 {NAV_LINKS.map((link) => (
-                  <a
-                    key={link.href}
-                    href={link.href}
+                  <Link
+                    key={link.label}
+                    href={"href" in link ? link.href : getNavHref(link.section)}
                     className="transition-colors duration-200 hover:text-[var(--text-primary)]"
                     onClick={() => setIsOpen(false)}
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 ))}
 
-                <a
-                  href="#contact"
+                <Link
+                  href={getNavHref("contact")}
                   className={clsx(
                     "mt-6 inline-flex",
                     "rounded-btn bg-blue px-5 py-[10px]",
@@ -164,7 +170,7 @@ export default function Navbar() {
                   onClick={() => setIsOpen(false)}
                 >
                   Book a Free Call
-                </a>
+                </Link>
               </nav>
             </div>
           </motion.aside>
