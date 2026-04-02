@@ -91,8 +91,10 @@ export default function TrustBadges() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(6, 1fr)",
+            gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))",
             gap: "16px",
+            width: "100%",
+            overflow: "visible",
           }}
         >
           {badges.map((badge, idx) => {
