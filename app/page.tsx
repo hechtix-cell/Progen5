@@ -11,7 +11,9 @@ import Navbar from "@/components/Navbar";
 import Pricing from "@/components/Pricing";
 import Services from "@/components/Services";
 import SkeletonLoader from "@/components/SkeletonLoader";
+import Stats from "@/components/Stats";
 import Testimonials from "@/components/Testimonials";
+import PricingCalculator from "@/components/PricingCalculator";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import TrustBadges from "@/components/TrustBadges";
 import FreeAuditPopup from "@/components/FreeAuditPopup";
@@ -79,8 +81,10 @@ export default function Home() {
               <TrustBadges />
               <Services />
               <About />
+              <Stats />
               <Testimonials />
               <Pricing />
+              <PricingCalculator />
               <FAQ />
               <Contact />
               <Footer />

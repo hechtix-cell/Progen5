@@ -1,5 +1,6 @@
 "use client";
 
+import type React from "react";
 import { motion } from "framer-motion";
 import { CheckCircle2, Info } from "lucide-react";
 import MoneyBackBadge from "@/components/MoneyBackBadge";
@@ -129,6 +130,25 @@ const cardVariants = {
   show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
 } as const;
 
+const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+  const card = e.currentTarget;
+  const rect = card.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+  const centerX = rect.width / 2;
+  const centerY = rect.height / 2;
+  const rotateX = (y - centerY) / 10;
+  const rotateY = (centerX - x) / 10;
+  card.style.transform =
+    `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
+};
+
+const handleMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
+  e.currentTarget.style.transform =
+    "perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)";
+  e.currentTarget.style.transition = "transform 500ms ease";
+};
+
 function Price({ value }: { value: string }) {
   return (
     <div className="mt-2 flex w-full items-baseline whitespace-nowrap">
@@ -156,13 +176,31 @@ function PricingCard({ plan }: { plan: Plan }) {
     <motion.div
       variants={cardVariants}
       className={[
-        "relative flex min-h-[420px] w-full flex-col break-words rounded-card p-[28px] transition-transform duration-200 ease-out hover:-translate-y-2",
-        "pricing-card card-surface",
+        "relative flex min-h-[420px] w-full flex-col break-words rounded-card p-[28px] transition-transform duration-200 ease-out",
+        "pricing-card",
         isRecommended ? "overflow-visible pt-[20px] lg:mt-[20px]" : "overflow-hidden",
         isRecommended
-          ? "border-2 border-blue bg-[#0d1929] shadow-[0_0_32px_rgba(0,123,252,0.15)] lg:scale-[1.02] pricing-glow"
+          ? "lg:scale-[1.02]"
           : "",
       ].join(" ")}
+      style={{
+        transition: "transform 100ms ease",
+        backdropFilter: "blur(20px)",
+        WebkitBackdropFilter: "blur(20px)",
+        borderRadius: "16px",
+        ...(isRecommended
+          ? {
+              background: "rgba(0,123,252,0.08)",
+              border: "1px solid rgba(0,123,252,0.4)",
+              boxShadow: "0 0 40px rgba(0,123,252,0.15)",
+            }
+          : {
+              background: "rgba(255,255,255,0.02)",
+              border: "1px solid rgba(255,255,255,0.06)",
+            }),
+      }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
     >
       {isRecommended ? (
         <div
@@ -241,29 +279,21 @@ export default function Pricing() {
         <div className="font-ui text-[12px] tracking-[3px] text-blue">
           PRICING
         </div>
-        <h2 className="mt-3 font-heading text-[34px] font-extrabold text-[var(--text-primary)] md:text-[48px]">
+        <h2
+          className="mt-3 font-heading text-[34px] font-extrabold md:text-[48px]"
+          style={{
+            background: "linear-gradient(135deg, #FFFFFF 0%, #A5A5A5 100%)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text",
+          }}
+        >
           Simple, Transparent Pricing
         </h2>
         <p className="mt-3 font-body text-[17px] text-[var(--text-secondary)]">
           No hidden fees. Pick the plan that fits your startup stage.
         </p>
       </motion.header>
-
-      <style>
-        {`
-          @keyframes borderGlow {
-            0%, 100% {
-              box-shadow: 0 0 20px rgba(0,123,252,0.2);
-            }
-            50% {
-              box-shadow: 0 0 50px rgba(0,123,252,0.6);
-            }
-          }
-          .pricing-glow {
-            animation: borderGlow 3s ease infinite;
-          }
-        `}
-      </style>
 
       <motion.div
         className="mx-auto mt-[60px] max-w-[1200px] overflow-visible"

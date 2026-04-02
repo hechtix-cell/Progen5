@@ -134,3 +134,19 @@ body {
   --chat--border-radius: 12px;
 }
 
+/* Colorful scrollbar */
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #007BFC, #6400FF);
+}
+
+/* Selection color */
+::selection {
+  background: rgba(0,123,252,0.3);
+  color: #FFFFFF;
+}
+
+/* Smooth transitions everywhere */
+* {
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+

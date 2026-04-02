@@ -71,7 +71,16 @@ export default function About() {
             WHO WE ARE
           </div>
 
-          <h2 className="mt-3 font-heading text-[32px] font-extrabold leading-[1.2] text-[var(--text-primary)] md:text-[44px]">
+          <h2
+            className="mt-3 font-heading text-[32px] font-extrabold leading-[1.2] md:text-[44px]"
+            style={{
+              background:
+                "linear-gradient(135deg, #FFFFFF 0%, #007BFC 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+            }}
+          >
             We Are Your Execution Partner
           </h2>
 

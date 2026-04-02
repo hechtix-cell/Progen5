@@ -105,15 +105,18 @@ export default function TrustBadges() {
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1 }}
                 style={{
-                  background: "#232227",
-                  border: "1px solid rgba(165,165,165,0.1)",
-                  borderRadius: "12px",
+                  background: "rgba(255,255,255,0.03)",
+                  backdropFilter: "blur(20px)",
+                  WebkitBackdropFilter: "blur(20px)",
+                  border: "1px solid rgba(255,255,255,0.08)",
+                  borderRadius: "16px",
                   padding: "20px 16px",
                   textAlign: "center",
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
                   gap: "10px",
+                  boxShadow: "0 8px 32px rgba(0,0,0,0.3)",
                 }}
               >
                 <div

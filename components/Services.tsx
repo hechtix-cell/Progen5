@@ -89,6 +89,51 @@ const cardVariants = {
 } as const;
 
 export default function Services() {
+  const baseGlassStyle: React.CSSProperties = {
+    background: "rgba(255,255,255,0.03)",
+    backdropFilter: "blur(20px)",
+    WebkitBackdropFilter: "blur(20px)",
+    border: "1px solid rgba(255,255,255,0.08)",
+    borderRadius: "16px",
+    boxShadow: "0 8px 32px rgba(0,0,0,0.3)",
+  };
+
+  const hoverGlassStyle: React.CSSProperties = {
+    background: "rgba(0,123,252,0.05)",
+    border: "1px solid rgba(0,123,252,0.3)",
+    boxShadow: "0 8px 32px rgba(0,123,252,0.1)",
+  };
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateX = (y - centerY) / 10;
+    const rotateY = (centerX - x) / 10;
+    card.style.transform =
+      `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
+  };
+
+  const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
+    const card = e.currentTarget;
+    card.style.background = hoverGlassStyle.background as string;
+    card.style.border = hoverGlassStyle.border as string;
+    card.style.boxShadow = hoverGlassStyle.boxShadow as string;
+  };
+
+  const handleMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
+    const card = e.currentTarget;
+    card.style.transform =
+      "perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)";
+    card.style.transition = "transform 500ms ease";
+    card.style.background = baseGlassStyle.background as string;
+    card.style.border = baseGlassStyle.border as string;
+    card.style.boxShadow = baseGlassStyle.boxShadow as string;
+  };
+
   return (
     <section
       id="services"
@@ -104,7 +149,16 @@ export default function Services() {
         <div className="mb-3 font-ui text-[12px] tracking-[3px] text-blue">
           WHAT WE BUILD
         </div>
-        <h2 className="font-heading text-[36px] font-extrabold text-[var(--text-primary)] md:text-[48px]">
+        <h2
+          className="font-heading text-[36px] font-extrabold md:text-[48px]"
+          style={{
+            background:
+              "linear-gradient(135deg, #FFFFFF 0%, #A5A5A5 100%)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text",
+          }}
+        >
           Services We Offer
         </h2>
         <p className="mt-3 font-body text-[17px] text-[var(--text-secondary)]">
@@ -123,7 +177,14 @@ export default function Services() {
           <motion.div
             key={service.title}
             variants={cardVariants}
-            className="card-surface group rounded-card p-8 transition-all duration-200 ease-out hover:-translate-y-1 hover:border-[rgba(0,123,252,0.5)] hover:shadow-[0_0_24px_rgba(0,123,252,0.08)]"
+            className="group rounded-card p-8"
+            style={{
+              ...baseGlassStyle,
+              transition: "transform 100ms ease",
+            }}
+            onMouseEnter={handleMouseEnter}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
           >
             <div className="flex h-11 w-11 items-center justify-center rounded-[10px] bg-[rgba(0,123,252,0.1)] p-[10px] transition-transform duration-300 ease-out group-hover:rotate-3 group-hover:scale-110">
               <service.Icon className="h-[22px] w-[22px] text-blue" />

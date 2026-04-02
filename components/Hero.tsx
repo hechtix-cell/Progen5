@@ -31,13 +31,71 @@ export default function Hero() {
         }}
       />
 
-      {/* Blue glow */}
+      <style>{`
+        @keyframes aurora1 {
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          33% { transform: translate(30px, -30px) scale(1.1); }
+          66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+        @keyframes aurora2 {
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          33% { transform: translate(-30px, 30px) scale(1.1); }
+          66% { transform: translate(20px, -20px) scale(0.9); }
+        }
+        @keyframes aurora3 {
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          50% { transform: translate(20px, 20px) scale(1.1); }
+        }
+      `}</style>
+
+      {/* Aurora blobs */}
       <div
         style={{
           position: "absolute",
-          inset: 0,
+          width: "600px",
+          height: "600px",
+          borderRadius: "50%",
           background:
-            "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(0,123,252,0.08) 0%, transparent 70%)",
+            "radial-gradient(circle, rgba(0,123,252,0.15) 0%, transparent 70%)",
+          top: "-100px",
+          left: "-100px",
+          animation: "aurora1 8s ease-in-out infinite",
+          filter: "blur(40px)",
+          pointerEvents: "none",
+          zIndex: 0,
+        }}
+      />
+
+      <div
+        style={{
+          position: "absolute",
+          width: "500px",
+          height: "500px",
+          borderRadius: "50%",
+          background:
+            "radial-gradient(circle, rgba(100,0,255,0.1) 0%, transparent 70%)",
+          bottom: "-50px",
+          right: "-50px",
+          animation: "aurora2 10s ease-in-out infinite",
+          filter: "blur(40px)",
+          pointerEvents: "none",
+          zIndex: 0,
+        }}
+      />
+
+      <div
+        style={{
+          position: "absolute",
+          width: "400px",
+          height: "400px",
+          borderRadius: "50%",
+          background:
+            "radial-gradient(circle, rgba(0,200,255,0.08) 0%, transparent 70%)",
+          top: "50%",
+          left: "60%",
+          animation: "aurora3 12s ease-in-out infinite",
+          filter: "blur(40px)",
+          pointerEvents: "none",
           zIndex: 0,
         }}
       />
@@ -94,7 +152,18 @@ export default function Hero() {
           }}
         >
           Turn your{" "}
-          <span style={{ color: "#007BFC" }}>Vision</span> into Reality
+          <span
+            style={{
+              background:
+                "linear-gradient(135deg, #007BFC 0%, #00C2FF 50%, #6400FF 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+            }}
+          >
+            Vision
+          </span>{" "}
+          into Reality
         </motion.h1>
 
         {/* Subheadline */}
