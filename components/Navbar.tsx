@@ -4,9 +4,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Menu, Moon, Sun, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import clsx from "clsx";
-import { useTheme } from "next-themes";
 
 const NAV_LINKS = [
   { label: "Services", section: "services" },
@@ -21,8 +20,6 @@ export default function Navbar() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
 
   const getNavHref = (section: string) => {
     if (pathname === "/") {
@@ -36,10 +33,6 @@ export default function Navbar() {
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  useEffect(() => {
-    setMounted(true);
   }, []);
 
   return (
@@ -76,32 +69,6 @@ export default function Navbar() {
             </Link>
           ))}
         </nav>
-
-        {mounted && (
-          <button
-            type="button"
-            aria-label="Toggle theme"
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            style={{
-              width: "38px",
-              height: "38px",
-              borderRadius: "8px",
-              background: "var(--bg-secondary, #232227)",
-              border: "1px solid rgba(165,165,165,0.2)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              cursor: "pointer",
-              transition: "all 200ms",
-            }}
-          >
-            {theme === "dark" ? (
-              <Sun size={16} color="#A5A5A5" />
-            ) : (
-              <Moon size={16} color="#555555" />
-            )}
-          </button>
-        )}
 
         {/* RIGHT */}
         <div className="flex items-center gap-3">
