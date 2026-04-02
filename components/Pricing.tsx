@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { CheckCircle2, Info } from "lucide-react";
+import MoneyBackBadge from "@/components/MoneyBackBadge";
 
 type Plan = {
   name: string;
@@ -319,6 +320,8 @@ export default function Pricing() {
           </div>
         </div>
       </motion.div>
+
+      <MoneyBackBadge />
 
       <div className="mx-auto mt-10 flex max-w-[800px] items-start justify-center gap-3 text-center font-body text-[14px] text-[var(--text-secondary)]">
         <Info className="mt-[2px] h-4 w-4 flex-none text-blue" />

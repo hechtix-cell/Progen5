@@ -13,6 +13,8 @@ import Services from "@/components/Services";
 import SkeletonLoader from "@/components/SkeletonLoader";
 import Testimonials from "@/components/Testimonials";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import TrustBadges from "@/components/TrustBadges";
+import FreeAuditPopup from "@/components/FreeAuditPopup";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
@@ -74,6 +76,7 @@ export default function Home() {
             <main>
               <Navbar />
               <Hero />
+              <TrustBadges />
               <Services />
               <About />
               <Testimonials />
@@ -82,6 +85,7 @@ export default function Home() {
               <Contact />
               <Footer />
               <WhatsAppButton />
+              <FreeAuditPopup />
               <CookieBanner />
             </main>
           </motion.div>

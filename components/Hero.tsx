@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
+import LiveVisitorCount from "@/components/LiveVisitorCount";
 
 export default function Hero() {
   return (
@@ -75,6 +76,8 @@ export default function Hero() {
         >
           🚀 Startup Execution Agency
         </motion.div>
+
+        <LiveVisitorCount />
 
         {/* Headline */}
         <motion.h1
