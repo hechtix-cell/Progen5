@@ -3,6 +3,7 @@
 import About from "@/components/About";
 import CookieBanner from "@/components/CookieBanner";
 import Contact from "@/components/Contact";
+import CountdownBanner from "@/components/CountdownBanner";
 import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
@@ -16,6 +17,7 @@ import PricingCalculator from "@/components/PricingCalculator";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import TrustBadges from "@/components/TrustBadges";
 import FreeAuditPopup from "@/components/FreeAuditPopup";
+import ComparisonTable from "@/components/ComparisonTable";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
@@ -75,6 +77,7 @@ export default function Home() {
             transition={{ duration: 0.5 }}
           >
             <main>
+              <CountdownBanner />
               <Navbar />
               <Hero />
               <TrustBadges />
@@ -84,6 +87,7 @@ export default function Home() {
               <Testimonials />
               <Pricing />
               <PricingCalculator />
+              <ComparisonTable />
               <FAQ />
               <Contact />
               <Footer />
