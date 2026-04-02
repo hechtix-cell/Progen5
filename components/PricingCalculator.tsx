@@ -76,12 +76,20 @@ export default function PricingCalculator() {
 
   return (
     <section
+      className="pricing-calculator-section"
       style={{
         background: "#0a0a0a",
         padding: "100px 80px",
         position: "relative",
       }}
     >
+      <style>{`
+        @media (max-width: 768px) {
+          .pricing-calculator-section {
+            padding: 80px 24px !important;
+          }
+        }
+      `}</style>
       <div style={{ maxWidth: "900px", margin: "0 auto" }}>
         {/* Header */}
         <motion.div
@@ -146,7 +154,7 @@ export default function PricingCalculator() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(2, 1fr)",
+            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
             gap: "12px",
             marginBottom: "32px",
           }}
@@ -172,6 +180,8 @@ export default function PricingCalculator() {
                   alignItems: "center",
                   transition: "all 200ms ease",
                   backdropFilter: "blur(10px)",
+                  minWidth: 0,
+                  overflow: "hidden",
                 }}
                 role="button"
                 tabIndex={0}
@@ -224,11 +234,12 @@ export default function PricingCalculator() {
                 <div
                   style={{
                     fontFamily: "Exo 2, sans-serif",
-                    fontSize: "16px",
+                    fontSize: "14px",
                     fontWeight: 700,
                     color: isSelected ? "#007BFC" : "#A5A5A5",
                     flexShrink: 0,
-                    marginLeft: "12px",
+                    marginLeft: "8px",
+                    whiteSpace: "nowrap",
                   }}
                 >
                   ₹{feature.price.toLocaleString()}

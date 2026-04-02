@@ -1,7 +1,6 @@
 "use client";
 
 import About from "@/components/About";
-import ChatWidget from "@/components/ChatWidget";
 import CookieBanner from "@/components/CookieBanner";
 import Contact from "@/components/Contact";
 import FAQ from "@/components/FAQ";
@@ -95,7 +94,6 @@ export default function Home() {
           </motion.div>
         )}
       </AnimatePresence>
-      <ChatWidget />
     </>
   );
 }

@@ -69,10 +69,13 @@ export default function FreeAuditPopup() {
               background: "#0a0a0a",
               border: "1px solid rgba(0,123,252,0.3)",
               borderRadius: "20px",
-              padding: "40px",
+              padding: "28px 20px",
+              width: "92vw",
               maxWidth: "480px",
-              width: "90%",
+              maxHeight: "90vh",
+              overflowY: "auto",
               zIndex: 9999,
+              boxSizing: "border-box",
               boxShadow: "0 0 60px rgba(0,123,252,0.15)",
             }}
           >

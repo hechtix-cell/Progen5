@@ -110,6 +110,7 @@ export default function Stats() {
   return (
     <section
       ref={ref}
+      className="stats-section"
       style={{
         background: "#000000",
         padding: "100px 80px",
@@ -117,6 +118,14 @@ export default function Stats() {
         overflow: "hidden",
       }}
     >
+      <style>{`
+        @media (max-width: 768px) {
+          .stats-section {
+            padding: 80px 24px !important;
+          }
+        }
+      `}</style>
+
       {/* Background glow */}
       <div
         style={{
@@ -181,8 +190,8 @@ export default function Stats() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            gap: "24px",
+            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+            gap: "20px",
           }}
         >
           {stats.map((stat, idx) => (
