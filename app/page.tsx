@@ -16,7 +16,6 @@ import Testimonials from "@/components/Testimonials";
 import PricingCalculator from "@/components/PricingCalculator";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import TrustBadges from "@/components/TrustBadges";
-import FreeAuditPopup from "@/components/FreeAuditPopup";
 import ComparisonTable from "@/components/ComparisonTable";
 import CursorTrail from "@/components/CursorTrail";
 import { AnimatePresence, motion } from "framer-motion";
@@ -94,7 +93,6 @@ export default function Home() {
               <Contact />
               <Footer />
               <WhatsAppButton />
-              <FreeAuditPopup />
               <CookieBanner />
             </main>
           </motion.div>
