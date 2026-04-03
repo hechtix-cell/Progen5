@@ -143,8 +143,13 @@ body {
   transition: border-color 200ms ease, box-shadow 200ms ease;
 }
 
+#tsparticles {
+  z-index: 0;
+}
+
 #tsparticles canvas {
   position: absolute !important;
   inset: 0 !important;
+  pointer-events: none !important;
 }
 
