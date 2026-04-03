@@ -14,6 +14,7 @@ export default function CursorTrail() {
   const [isVisible, setIsVisible] = useState(false);
   const counterRef = useRef(0);
   const lastPos = useRef({ x: 0, y: 0 });
+  const hideTimeoutRef = useRef<number | null>(null);
 
   useEffect(() => {
     if (window.innerWidth < 768) return;
@@ -26,10 +27,15 @@ export default function CursorTrail() {
       const dy = y - lastPos.current.y;
       const dist = Math.sqrt(dx * dx + dy * dy);
 
-      if (dist < 8) return;
+      if (dist < 2) return;
       lastPos.current = { x, y };
 
       setIsVisible(true);
+      if (hideTimeoutRef.current) window.clearTimeout(hideTimeoutRef.current);
+      hideTimeoutRef.current = window.setTimeout(
+        () => setIsVisible(false),
+        1200
+      );
       counterRef.current += 1;
       const id = counterRef.current;
 
@@ -67,6 +73,7 @@ export default function CursorTrail() {
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseleave", handleMouseLeave);
+      if (hideTimeoutRef.current) window.clearTimeout(hideTimeoutRef.current);
     };
   }, []);
 
