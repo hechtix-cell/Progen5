@@ -1,9 +1,9 @@
-`use client`
+"use client";
 import { useEffect, useState, useCallback } from "react";
 import Particles from "@tsparticles/react";
 import { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
-import type { Container, Engine } from "tsparticles-engine";
+import type { Container, Engine } from "@tsparticles/engine";
 
 export default function ParticleField() {
   const [init, setInit] = useState(false);
@@ -100,14 +100,15 @@ export default function ParticleField() {
             straight: false,
             attract: {
               enable: true,
-              rotateX: 600,
-              rotateY: 1200,
+              rotate: {
+                x: 600,
+                y: 1200,
+              },
             },
           },
           number: {
             density: {
               enable: true,
-              area: 900,
             },
             value: 80,
           },
@@ -116,7 +117,6 @@ export default function ParticleField() {
             animation: {
               enable: true,
               speed: 1,
-              minimumValue: 0.1,
             },
           },
           shape: { type: "circle" },
@@ -125,7 +125,6 @@ export default function ParticleField() {
             animation: {
               enable: true,
               speed: 2,
-              minimumValue: 0.5,
             },
           },
         },
