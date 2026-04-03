@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import LiveVisitorCount from "@/components/LiveVisitorCount";
+import ParticleField from "./ParticleField";
 
 export default function Hero() {
   return (
@@ -19,17 +20,7 @@ export default function Hero() {
         padding: "0 80px",
       }}
     >
-      {/* Dot grid background */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          backgroundImage:
-            "radial-gradient(circle, rgba(0,123,252,0.15) 1px, transparent 1px)",
-          backgroundSize: "30px 30px",
-          zIndex: 0,
-        }}
-      />
+      <ParticleField />
 
       <style>{`
         @keyframes aurora1 {

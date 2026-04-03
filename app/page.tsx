@@ -18,6 +18,7 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import TrustBadges from "@/components/TrustBadges";
 import FreeAuditPopup from "@/components/FreeAuditPopup";
 import ComparisonTable from "@/components/ComparisonTable";
+import CursorTrail from "@/components/CursorTrail";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
@@ -44,6 +45,7 @@ export default function Home() {
 
   return (
     <>
+      <CursorTrail />
       <AnimatePresence>
         {showIntro ? (
           <motion.div
